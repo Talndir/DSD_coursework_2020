@@ -6,7 +6,7 @@
    version="1.0"
    description=""
    tags=""
-   categories="System" />
+   categories="" />
  <parameter name="bonusData"><![CDATA[bonusData 
 {
    element clk_0
@@ -89,14 +89,6 @@
          type = "int";
       }
    }
-   element sys_clk_timer.irq
-   {
-      datum _tags
-      {
-         value = "";
-         type = "String";
-      }
-   }
    element sys_clk_timer.s1
    {
       datum baseAddress
@@ -135,7 +127,7 @@
  <parameter name="hideFromIPCatalog" value="false" />
  <parameter name="lockedInterfaceDefinition" value="" />
  <parameter name="maxAdditionalLatency" value="1" />
- <parameter name="projectName" value="hello_world.qpf" />
+ <parameter name="projectName" value="" />
  <parameter name="sopcBorderPoints" value="false" />
  <parameter name="systemHash" value="0" />
  <parameter name="testBenchDutName" value="" />
@@ -148,7 +140,6 @@
    internal="led_pio.external_connection"
    type="conduit"
    dir="end" />
- <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
  <module name="clk_0" kind="clock_source" version="18.1" enabled="1">
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="clockFrequencyKnown" value="true" />
@@ -476,6 +467,11 @@
    start="clk_0.clk_reset"
    end="onchip_mem.reset1" />
  <connection kind="reset" version="18.1" start="clk_0.clk_reset" end="cpu.reset_n" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="cpu.jtag_debug_module_reset"
+   end="clk_0.clk_in_reset" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.enableEccProtection" value="FALSE" />
  <interconnectRequirement for="$system" name="qsys_mm.insertDefaultSlave" value="FALSE" />

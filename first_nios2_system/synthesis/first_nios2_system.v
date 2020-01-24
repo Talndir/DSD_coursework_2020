@@ -5,10 +5,10 @@
 `timescale 1 ps / 1 ps
 module first_nios2_system (
 		input  wire       clk_clk,                            //                         clk.clk
-		output wire [7:0] led_pio_external_connection_export, // led_pio_external_connection.export
-		input  wire       reset_reset_n                       //                       reset.reset_n
+		output wire [7:0] led_pio_external_connection_export  // led_pio_external_connection.export
 	);
 
+	wire         cpu_jtag_debug_module_reset_reset;                         // cpu:jtag_debug_module_resetrequest -> rst_controller:reset_in0
 	wire  [31:0] cpu_data_master_readdata;                                  // mm_interconnect_0:cpu_data_master_readdata -> cpu:d_readdata
 	wire         cpu_data_master_waitrequest;                               // mm_interconnect_0:cpu_data_master_waitrequest -> cpu:d_waitrequest
 	wire         cpu_data_master_debugaccess;                               // cpu:jtag_debug_module_debugaccess_to_roms -> mm_interconnect_0:cpu_data_master_debugaccess
@@ -80,7 +80,7 @@ module first_nios2_system (
 		.i_waitrequest                         (cpu_instruction_master_waitrequest),                  //                          .waitrequest
 		.i_readdatavalid                       (cpu_instruction_master_readdatavalid),                //                          .readdatavalid
 		.d_irq                                 (cpu_d_irq_irq),                                       //                     d_irq.irq
-		.jtag_debug_module_resetrequest        (),                                                    //   jtag_debug_module_reset.reset
+		.jtag_debug_module_resetrequest        (cpu_jtag_debug_module_reset_reset),                   //   jtag_debug_module_reset.reset
 		.jtag_debug_module_address             (mm_interconnect_0_cpu_jtag_debug_module_address),     //         jtag_debug_module.address
 		.jtag_debug_module_byteenable          (mm_interconnect_0_cpu_jtag_debug_module_byteenable),  //                          .byteenable
 		.jtag_debug_module_debugaccess         (mm_interconnect_0_cpu_jtag_debug_module_debugaccess), //                          .debugaccess
@@ -234,7 +234,7 @@ module first_nios2_system (
 		.USE_RESET_REQUEST_IN15    (0),
 		.ADAPT_RESET_REQUEST       (0)
 	) rst_controller (
-		.reset_in0      (~reset_reset_n),                     // reset_in0.reset
+		.reset_in0      (cpu_jtag_debug_module_reset_reset),  // reset_in0.reset
 		.clk            (clk_clk),                            //       clk.clk
 		.reset_out      (rst_controller_reset_out_reset),     // reset_out.reset
 		.reset_req      (rst_controller_reset_out_reset_req), //          .reset_req
