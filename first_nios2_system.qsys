@@ -6,7 +6,7 @@
    version="1.0"
    description=""
    tags=""
-   categories="" />
+   categories="System" />
  <parameter name="bonusData"><![CDATA[bonusData 
 {
    element clk_0
@@ -29,7 +29,7 @@
    {
       datum baseAddress
       {
-         value = "67584";
+         value = "133120";
          type = "String";
       }
    }
@@ -45,7 +45,7 @@
    {
       datum baseAddress
       {
-         value = "69688";
+         value = "135224";
          type = "String";
       }
    }
@@ -61,7 +61,7 @@
    {
       datum baseAddress
       {
-         value = "69664";
+         value = "135200";
          type = "String";
       }
    }
@@ -77,7 +77,7 @@
    {
       datum baseAddress
       {
-         value = "32768";
+         value = "65536";
          type = "String";
       }
    }
@@ -93,7 +93,7 @@
    {
       datum baseAddress
       {
-         value = "69632";
+         value = "135168";
          type = "String";
       }
    }
@@ -109,7 +109,7 @@
    {
       datum baseAddress
       {
-         value = "69680";
+         value = "135216";
          type = "String";
       }
    }
@@ -127,7 +127,7 @@
  <parameter name="hideFromIPCatalog" value="false" />
  <parameter name="lockedInterfaceDefinition" value="" />
  <parameter name="maxAdditionalLatency" value="1" />
- <parameter name="projectName" value="" />
+ <parameter name="projectName" value="hello_world.qpf" />
  <parameter name="sopcBorderPoints" value="false" />
  <parameter name="systemHash" value="0" />
  <parameter name="testBenchDutName" value="" />
@@ -140,6 +140,7 @@
    internal="led_pio.external_connection"
    type="conduit"
    dir="end" />
+ <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
  <module name="clk_0" kind="clock_source" version="18.1" enabled="1">
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="clockFrequencyKnown" value="true" />
@@ -155,8 +156,8 @@
   <parameter name="cpuID_stored" value="0" />
   <parameter name="cpuReset" value="false" />
   <parameter name="customInstSlavesSystemInfo" value="&lt;info/&gt;" />
-  <parameter name="dataAddrWidth" value="17" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_mem.s1' start='0x8000' end='0xD000' /><slave name='cpu.jtag_debug_module' start='0x10800' end='0x11000' /><slave name='sys_clk_timer.s1' start='0x11000' end='0x11020' /><slave name='led_pio.s1' start='0x11020' end='0x11030' /><slave name='sysid.control_slave' start='0x11030' end='0x11038' /><slave name='jtag_uart.avalon_jtag_slave' start='0x11038' end='0x11040' /></address-map>]]></parameter>
+  <parameter name="dataAddrWidth" value="18" />
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_mem.s1' start='0x10000' end='0x1A000' /><slave name='cpu.jtag_debug_module' start='0x20800' end='0x21000' /><slave name='sys_clk_timer.s1' start='0x21000' end='0x21020' /><slave name='led_pio.s1' start='0x21020' end='0x21030' /><slave name='sysid.control_slave' start='0x21030' end='0x21038' /><slave name='jtag_uart.avalon_jtag_slave' start='0x21038' end='0x21040' /></address-map>]]></parameter>
   <parameter name="dcache_bursts" value="false" />
   <parameter name="dcache_lineSize" value="32" />
   <parameter name="dcache_numTCDM" value="0" />
@@ -182,8 +183,8 @@
   <parameter name="icache_size" value="2048" />
   <parameter name="icache_tagramBlockType" value="Automatic" />
   <parameter name="impl" value="Small" />
-  <parameter name="instAddrWidth" value="17" />
-  <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='onchip_mem.s1' start='0x8000' end='0xD000' /><slave name='cpu.jtag_debug_module' start='0x10800' end='0x11000' /></address-map>]]></parameter>
+  <parameter name="instAddrWidth" value="18" />
+  <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='onchip_mem.s1' start='0x10000' end='0x1A000' /><slave name='cpu.jtag_debug_module' start='0x20800' end='0x21000' /></address-map>]]></parameter>
   <parameter name="internalIrqMaskSystemInfo" value="65538" />
   <parameter name="manuallyAssignCpuID" value="true" />
   <parameter name="mmu_TLBMissExcOffset" value="0" />
@@ -326,7 +327,7 @@
   <parameter name="initMemContent" value="true" />
   <parameter name="initializationFileName" value="onchip_mem.hex" />
   <parameter name="instanceID" value="NONE" />
-  <parameter name="memorySize" value="20480" />
+  <parameter name="memorySize" value="40960" />
   <parameter name="readDuringWriteMode" value="DONT_CARE" />
   <parameter name="resetrequest_enabled" value="true" />
   <parameter name="simAllowMRAMContentsFile" value="false" />
@@ -367,7 +368,7 @@
    start="cpu.data_master"
    end="jtag_uart.avalon_jtag_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00011038" />
+  <parameter name="baseAddress" value="0x00021038" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -376,7 +377,7 @@
    start="cpu.data_master"
    end="sysid.control_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00011030" />
+  <parameter name="baseAddress" value="0x00021030" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -385,7 +386,7 @@
    start="cpu.data_master"
    end="cpu.jtag_debug_module">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00010800" />
+  <parameter name="baseAddress" value="0x00020800" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -394,7 +395,7 @@
    start="cpu.data_master"
    end="onchip_mem.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x8000" />
+  <parameter name="baseAddress" value="0x00010000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -403,12 +404,12 @@
    start="cpu.data_master"
    end="sys_clk_timer.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00011000" />
+  <parameter name="baseAddress" value="0x00021000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection kind="avalon" version="18.1" start="cpu.data_master" end="led_pio.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00011020" />
+  <parameter name="baseAddress" value="0x00021020" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -417,7 +418,7 @@
    start="cpu.instruction_master"
    end="cpu.jtag_debug_module">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00010800" />
+  <parameter name="baseAddress" value="0x00020800" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -426,7 +427,7 @@
    start="cpu.instruction_master"
    end="onchip_mem.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x8000" />
+  <parameter name="baseAddress" value="0x00010000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection kind="clock" version="18.1" start="clk_0.clk" end="cpu.clk" />
@@ -467,11 +468,6 @@
    start="clk_0.clk_reset"
    end="onchip_mem.reset1" />
  <connection kind="reset" version="18.1" start="clk_0.clk_reset" end="cpu.reset_n" />
- <connection
-   kind="reset"
-   version="18.1"
-   start="cpu.jtag_debug_module_reset"
-   end="clk_0.clk_in_reset" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.enableEccProtection" value="FALSE" />
  <interconnectRequirement for="$system" name="qsys_mm.insertDefaultSlave" value="FALSE" />
