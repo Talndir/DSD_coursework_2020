@@ -29,7 +29,7 @@
    {
       datum baseAddress
       {
-         value = "133120";
+         value = "4196352";
          type = "String";
       }
    }
@@ -45,7 +45,7 @@
    {
       datum baseAddress
       {
-         value = "135224";
+         value = "4198456";
          type = "String";
       }
    }
@@ -61,7 +61,7 @@
    {
       datum baseAddress
       {
-         value = "135200";
+         value = "4198432";
          type = "String";
       }
    }
@@ -77,7 +77,7 @@
    {
       datum baseAddress
       {
-         value = "65536";
+         value = "2097152";
          type = "String";
       }
    }
@@ -93,7 +93,7 @@
    {
       datum baseAddress
       {
-         value = "135168";
+         value = "4198400";
          type = "String";
       }
    }
@@ -109,7 +109,7 @@
    {
       datum baseAddress
       {
-         value = "135216";
+         value = "4198448";
          type = "String";
       }
    }
@@ -156,8 +156,8 @@
   <parameter name="cpuID_stored" value="0" />
   <parameter name="cpuReset" value="false" />
   <parameter name="customInstSlavesSystemInfo" value="&lt;info/&gt;" />
-  <parameter name="dataAddrWidth" value="18" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_mem.s1' start='0x10000' end='0x1A000' /><slave name='cpu.jtag_debug_module' start='0x20800' end='0x21000' /><slave name='sys_clk_timer.s1' start='0x21000' end='0x21020' /><slave name='led_pio.s1' start='0x21020' end='0x21030' /><slave name='sysid.control_slave' start='0x21030' end='0x21038' /><slave name='jtag_uart.avalon_jtag_slave' start='0x21038' end='0x21040' /></address-map>]]></parameter>
+  <parameter name="dataAddrWidth" value="23" />
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_mem.s1' start='0x200000' end='0x205000' /><slave name='cpu.jtag_debug_module' start='0x400800' end='0x401000' /><slave name='sys_clk_timer.s1' start='0x401000' end='0x401020' /><slave name='led_pio.s1' start='0x401020' end='0x401030' /><slave name='sysid.control_slave' start='0x401030' end='0x401038' /><slave name='jtag_uart.avalon_jtag_slave' start='0x401038' end='0x401040' /></address-map>]]></parameter>
   <parameter name="dcache_bursts" value="false" />
   <parameter name="dcache_lineSize" value="32" />
   <parameter name="dcache_numTCDM" value="0" />
@@ -183,8 +183,8 @@
   <parameter name="icache_size" value="2048" />
   <parameter name="icache_tagramBlockType" value="Automatic" />
   <parameter name="impl" value="Small" />
-  <parameter name="instAddrWidth" value="18" />
-  <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='onchip_mem.s1' start='0x10000' end='0x1A000' /><slave name='cpu.jtag_debug_module' start='0x20800' end='0x21000' /></address-map>]]></parameter>
+  <parameter name="instAddrWidth" value="23" />
+  <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='onchip_mem.s1' start='0x200000' end='0x205000' /><slave name='cpu.jtag_debug_module' start='0x400800' end='0x401000' /></address-map>]]></parameter>
   <parameter name="internalIrqMaskSystemInfo" value="65538" />
   <parameter name="manuallyAssignCpuID" value="true" />
   <parameter name="mmu_TLBMissExcOffset" value="0" />
@@ -327,7 +327,7 @@
   <parameter name="initMemContent" value="true" />
   <parameter name="initializationFileName" value="onchip_mem.hex" />
   <parameter name="instanceID" value="NONE" />
-  <parameter name="memorySize" value="40960" />
+  <parameter name="memorySize" value="20480" />
   <parameter name="readDuringWriteMode" value="DONT_CARE" />
   <parameter name="resetrequest_enabled" value="true" />
   <parameter name="simAllowMRAMContentsFile" value="false" />
@@ -368,7 +368,7 @@
    start="cpu.data_master"
    end="jtag_uart.avalon_jtag_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00021038" />
+  <parameter name="baseAddress" value="0x00401038" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -377,7 +377,7 @@
    start="cpu.data_master"
    end="sysid.control_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00021030" />
+  <parameter name="baseAddress" value="0x00401030" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -386,7 +386,7 @@
    start="cpu.data_master"
    end="cpu.jtag_debug_module">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00020800" />
+  <parameter name="baseAddress" value="0x00400800" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -395,7 +395,7 @@
    start="cpu.data_master"
    end="onchip_mem.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00010000" />
+  <parameter name="baseAddress" value="0x00200000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -404,12 +404,12 @@
    start="cpu.data_master"
    end="sys_clk_timer.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00021000" />
+  <parameter name="baseAddress" value="0x00401000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection kind="avalon" version="18.1" start="cpu.data_master" end="led_pio.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00021020" />
+  <parameter name="baseAddress" value="0x00401020" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -418,7 +418,7 @@
    start="cpu.instruction_master"
    end="cpu.jtag_debug_module">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00020800" />
+  <parameter name="baseAddress" value="0x00400800" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -427,7 +427,7 @@
    start="cpu.instruction_master"
    end="onchip_mem.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00010000" />
+  <parameter name="baseAddress" value="0x00200000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection kind="clock" version="18.1" start="clk_0.clk" end="cpu.clk" />

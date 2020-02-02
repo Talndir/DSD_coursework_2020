@@ -7,7 +7,8 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#define TEST 2
+#define TEST 3
+#define ARR_SIZE 256
 
 #if TEST == 1
 
@@ -18,67 +19,93 @@
 #elif TEST == 2
 
 // Test case 2
-#define STEP 1/8.0
+#define STEP (1/8.0)
 #define N 2041
 
 #else
 
 //Test case 3, default
-#define STEP 1/1024.0
-#define N 5000 //261121
+#define STEP (1/1024.0)
+#define N 26112//1
 
 #endif
 
 // Generates the vector x and stores it in the memory
-void generateVector(float x[N])
+void generateVector(float x[ARR_SIZE], int start, int length)
 {
-	float v = 0;
-	for (unsigned int i = 0; i < N; ++i)
+	float v = start * STEP;
+	for (unsigned int i = 0; i < length; ++i)
 	{
 		x[i] = v;
 		v += STEP;
 	}
 }
 
-float sumVector(float x[N])
+float sumVector(float x[ARR_SIZE], int length)
 {
 	float sum = 0.f;
-	for (unsigned int i = 0; i < N; ++i)
+	for (unsigned int i = 0; i < length; ++i)
+	{
 		sum += x[i] * (x[i] + 1.f);
+	}
 
 	return sum;
 }
 
-int main()
+long unsigned runOnce()
 {
-	//printf("Task 2!\n");
-
-	// Define input vector
-	float x[N];
-
-	// Returned result
-	float y;
-	generateVector(x);
-
-	// The following is used for timing
+	float x[ARR_SIZE];
+	long unsigned time = 0;
 	clock_t exec_t1, exec_t2;
-	exec_t1 = times(NULL); 	// Get system time before starting the process
 
-	// The code that you want to time goes here
-	y = sumVector(x);
-	// till here
+	float y = 0.f;
+	int pos = 0;
+	while (N - pos > ARR_SIZE)
+	{
+		generateVector(x, pos, ARR_SIZE);
+		exec_t1 = times(NULL); 	// Get time before starting
+		y += sumVector(x, ARR_SIZE);
+		exec_t2 = times(NULL); 	// Get time after finishing
+		time += exec_t2 - exec_t1;
+		pos += ARR_SIZE;
+	}
+	if (pos != N)
+	{
+		generateVector(x, pos, N - pos);
+		exec_t1 = times(NULL); 	// Get time before starting
+		y += sumVector(x, N - pos);
+		exec_t2 = times(NULL); 	// Get time after finishing
+		time += exec_t2 - exec_t1;
+	}
 
-	exec_t2 = times(NULL); 	// Get system time after finishing the process
-	//printf(" proc time = %lu ms\n", exec_t2 - exec_t1);
+	printf(" proc time = %lu ms\n", time);
 
-	unsigned int n = 0;
+	int n = 0;
 	while (y > 10e9)
 	{
 		y /= 2.f;
 		++n;
 	}
-	//printf(" Result (divided by 2^%u) = %d\n", n, (int)y);
-	//alt_putstr("hi");
+	while (y < 10e8)
+	{
+		y *= 2.f;
+		--n;
+	}
+
+	printf(" Result (divided by 2^%d) = %d\n", n, (int)y);
+	return time;
+}
+
+int main()
+{
+	printf("Task 2!\n");
+
+	// Run 10 times
+	long unsigned sum = 0;
+	for (unsigned int i = 0; i < 10; ++i)
+		sum += runOnce();
+	sum /= 10;
+	printf("Average time: %lu\n", sum);
 
 	return 0;
 }
