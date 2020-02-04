@@ -6,8 +6,9 @@
 #include <system.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <math.h>
 
-#define TEST 3
+#define TEST 1
 
 #if TEST == 1
 
@@ -45,7 +46,7 @@ float sumVector(float *x, int length)
 	float sum = 0.f;
 	for (unsigned int i = 0; i < length; ++i)
 	{
-		sum += x[i] * (x[i] + 1.f);
+		sum += x[i] * (0.5f + x[i] * cos((x[i] / 128.f) - 1.f));
 	}
 
 	return sum;
