@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'first_nios2_system'
  * SOPC Builder design path: ../../first_nios2_system.sopcinfo
  *
- * Generated: Fri Jan 24 19:37:24 GMT 2020
+ * Generated: Sun Feb 02 20:42:27 GMT 2020
  */
 
 /*
@@ -65,10 +65,10 @@
  *
  */
 
-#define ONCHIP_MEM_REGION_BASE 0x200020
-#define ONCHIP_MEM_REGION_SPAN 20448
-#define RESET_REGION_BASE 0x200000
+#define RESET_REGION_BASE 0x800000
 #define RESET_REGION_SPAN 32
+#define SDRAM_REGION_BASE 0x800020
+#define SDRAM_REGION_SPAN 8388576
 
 
 /*
@@ -76,11 +76,11 @@
  *
  */
 
-#define ALT_EXCEPTIONS_DEVICE ONCHIP_MEM
-#define ALT_RESET_DEVICE ONCHIP_MEM
-#define ALT_RODATA_DEVICE ONCHIP_MEM
-#define ALT_RWDATA_DEVICE ONCHIP_MEM
-#define ALT_TEXT_DEVICE ONCHIP_MEM
+#define ALT_EXCEPTIONS_DEVICE SDRAM
+#define ALT_RESET_DEVICE SDRAM
+#define ALT_RODATA_DEVICE SDRAM
+#define ALT_RWDATA_DEVICE SDRAM
+#define ALT_TEXT_DEVICE SDRAM
 
 
 /*

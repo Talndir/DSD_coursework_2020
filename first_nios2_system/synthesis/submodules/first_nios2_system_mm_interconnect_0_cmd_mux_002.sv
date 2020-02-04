@@ -43,8 +43,8 @@
 //   ARBITRATION_SHARES:  1 1
 //   ARBITRATION_SCHEME   "round-robin"
 //   PIPELINE_ARB:        1
-//   PKT_TRANS_LOCK:      63 (arbitration locking enabled)
-//   ST_DATA_W:           99
+//   PKT_TRANS_LOCK:      65 (arbitration locking enabled)
+//   ST_DATA_W:           101
 //   ST_CHANNEL_W:        6
 // ------------------------------------------
 
@@ -54,14 +54,14 @@ module first_nios2_system_mm_interconnect_0_cmd_mux_002
     // Sinks
     // ----------------------
     input                       sink0_valid,
-    input [99-1   : 0]  sink0_data,
+    input [101-1   : 0]  sink0_data,
     input [6-1: 0]  sink0_channel,
     input                       sink0_startofpacket,
     input                       sink0_endofpacket,
     output                      sink0_ready,
 
     input                       sink1_valid,
-    input [99-1   : 0]  sink1_data,
+    input [101-1   : 0]  sink1_data,
     input [6-1: 0]  sink1_channel,
     input                       sink1_startofpacket,
     input                       sink1_endofpacket,
@@ -72,7 +72,7 @@ module first_nios2_system_mm_interconnect_0_cmd_mux_002
     // Source
     // ----------------------
     output                      src_valid,
-    output [99-1    : 0] src_data,
+    output [101-1    : 0] src_data,
     output [6-1 : 0] src_channel,
     output                      src_startofpacket,
     output                      src_endofpacket,
@@ -84,13 +84,13 @@ module first_nios2_system_mm_interconnect_0_cmd_mux_002
     input clk,
     input reset
 );
-    localparam PAYLOAD_W        = 99 + 6 + 2;
+    localparam PAYLOAD_W        = 101 + 6 + 2;
     localparam NUM_INPUTS       = 2;
     localparam SHARE_COUNTER_W  = 1;
     localparam PIPELINE_ARB     = 1;
-    localparam ST_DATA_W        = 99;
+    localparam ST_DATA_W        = 101;
     localparam ST_CHANNEL_W     = 6;
-    localparam PKT_TRANS_LOCK   = 63;
+    localparam PKT_TRANS_LOCK   = 65;
 
     // ------------------------------------------
     // Signals
@@ -122,8 +122,8 @@ module first_nios2_system_mm_interconnect_0_cmd_mux_002
     // ------------------------------------------
     reg [NUM_INPUTS - 1 : 0] lock;
     always @* begin
-      lock[0] = sink0_data[63];
-      lock[1] = sink1_data[63];
+      lock[0] = sink0_data[65];
+      lock[1] = sink1_data[65];
     end
     reg [NUM_INPUTS - 1 : 0] locked = '0;
     always @(posedge clk or posedge reset) begin

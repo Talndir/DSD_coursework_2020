@@ -4,22 +4,31 @@
 
 `timescale 1 ps / 1 ps
 module first_nios2_system (
-		input  wire       clk_clk,                            //                         clk.clk
-		output wire [7:0] led_pio_external_connection_export, // led_pio_external_connection.export
-		input  wire       reset_reset_n                       //                       reset.reset_n
+		input  wire        clk_clk,                            //                         clk.clk
+		output wire [7:0]  led_pio_external_connection_export, // led_pio_external_connection.export
+		input  wire        reset_reset_n,                      //                       reset.reset_n
+		output wire [11:0] sdram_wire_addr,                    //                  sdram_wire.addr
+		output wire [1:0]  sdram_wire_ba,                      //                            .ba
+		output wire        sdram_wire_cas_n,                   //                            .cas_n
+		output wire        sdram_wire_cke,                     //                            .cke
+		output wire        sdram_wire_cs_n,                    //                            .cs_n
+		inout  wire [15:0] sdram_wire_dq,                      //                            .dq
+		output wire [1:0]  sdram_wire_dqm,                     //                            .dqm
+		output wire        sdram_wire_ras_n,                   //                            .ras_n
+		output wire        sdram_wire_we_n                     //                            .we_n
 	);
 
 	wire  [31:0] cpu_data_master_readdata;                                  // mm_interconnect_0:cpu_data_master_readdata -> cpu:d_readdata
 	wire         cpu_data_master_waitrequest;                               // mm_interconnect_0:cpu_data_master_waitrequest -> cpu:d_waitrequest
 	wire         cpu_data_master_debugaccess;                               // cpu:jtag_debug_module_debugaccess_to_roms -> mm_interconnect_0:cpu_data_master_debugaccess
-	wire  [22:0] cpu_data_master_address;                                   // cpu:d_address -> mm_interconnect_0:cpu_data_master_address
+	wire  [24:0] cpu_data_master_address;                                   // cpu:d_address -> mm_interconnect_0:cpu_data_master_address
 	wire   [3:0] cpu_data_master_byteenable;                                // cpu:d_byteenable -> mm_interconnect_0:cpu_data_master_byteenable
 	wire         cpu_data_master_read;                                      // cpu:d_read -> mm_interconnect_0:cpu_data_master_read
 	wire         cpu_data_master_write;                                     // cpu:d_write -> mm_interconnect_0:cpu_data_master_write
 	wire  [31:0] cpu_data_master_writedata;                                 // cpu:d_writedata -> mm_interconnect_0:cpu_data_master_writedata
 	wire  [31:0] cpu_instruction_master_readdata;                           // mm_interconnect_0:cpu_instruction_master_readdata -> cpu:i_readdata
 	wire         cpu_instruction_master_waitrequest;                        // mm_interconnect_0:cpu_instruction_master_waitrequest -> cpu:i_waitrequest
-	wire  [22:0] cpu_instruction_master_address;                            // cpu:i_address -> mm_interconnect_0:cpu_instruction_master_address
+	wire  [24:0] cpu_instruction_master_address;                            // cpu:i_address -> mm_interconnect_0:cpu_instruction_master_address
 	wire         cpu_instruction_master_read;                               // cpu:i_read -> mm_interconnect_0:cpu_instruction_master_read
 	wire         cpu_instruction_master_readdatavalid;                      // mm_interconnect_0:cpu_instruction_master_readdatavalid -> cpu:i_readdatavalid
 	wire         mm_interconnect_0_jtag_uart_avalon_jtag_slave_chipselect;  // mm_interconnect_0:jtag_uart_avalon_jtag_slave_chipselect -> jtag_uart:av_chipselect
@@ -39,13 +48,6 @@ module first_nios2_system (
 	wire   [3:0] mm_interconnect_0_cpu_jtag_debug_module_byteenable;        // mm_interconnect_0:cpu_jtag_debug_module_byteenable -> cpu:jtag_debug_module_byteenable
 	wire         mm_interconnect_0_cpu_jtag_debug_module_write;             // mm_interconnect_0:cpu_jtag_debug_module_write -> cpu:jtag_debug_module_write
 	wire  [31:0] mm_interconnect_0_cpu_jtag_debug_module_writedata;         // mm_interconnect_0:cpu_jtag_debug_module_writedata -> cpu:jtag_debug_module_writedata
-	wire         mm_interconnect_0_onchip_mem_s1_chipselect;                // mm_interconnect_0:onchip_mem_s1_chipselect -> onchip_mem:chipselect
-	wire  [31:0] mm_interconnect_0_onchip_mem_s1_readdata;                  // onchip_mem:readdata -> mm_interconnect_0:onchip_mem_s1_readdata
-	wire  [12:0] mm_interconnect_0_onchip_mem_s1_address;                   // mm_interconnect_0:onchip_mem_s1_address -> onchip_mem:address
-	wire   [3:0] mm_interconnect_0_onchip_mem_s1_byteenable;                // mm_interconnect_0:onchip_mem_s1_byteenable -> onchip_mem:byteenable
-	wire         mm_interconnect_0_onchip_mem_s1_write;                     // mm_interconnect_0:onchip_mem_s1_write -> onchip_mem:write
-	wire  [31:0] mm_interconnect_0_onchip_mem_s1_writedata;                 // mm_interconnect_0:onchip_mem_s1_writedata -> onchip_mem:writedata
-	wire         mm_interconnect_0_onchip_mem_s1_clken;                     // mm_interconnect_0:onchip_mem_s1_clken -> onchip_mem:clken
 	wire         mm_interconnect_0_sys_clk_timer_s1_chipselect;             // mm_interconnect_0:sys_clk_timer_s1_chipselect -> sys_clk_timer:chipselect
 	wire  [15:0] mm_interconnect_0_sys_clk_timer_s1_readdata;               // sys_clk_timer:readdata -> mm_interconnect_0:sys_clk_timer_s1_readdata
 	wire   [2:0] mm_interconnect_0_sys_clk_timer_s1_address;                // mm_interconnect_0:sys_clk_timer_s1_address -> sys_clk_timer:address
@@ -56,11 +58,20 @@ module first_nios2_system (
 	wire   [1:0] mm_interconnect_0_led_pio_s1_address;                      // mm_interconnect_0:led_pio_s1_address -> led_pio:address
 	wire         mm_interconnect_0_led_pio_s1_write;                        // mm_interconnect_0:led_pio_s1_write -> led_pio:write_n
 	wire  [31:0] mm_interconnect_0_led_pio_s1_writedata;                    // mm_interconnect_0:led_pio_s1_writedata -> led_pio:writedata
+	wire         mm_interconnect_0_sdram_s1_chipselect;                     // mm_interconnect_0:sdram_s1_chipselect -> sdram:az_cs
+	wire  [15:0] mm_interconnect_0_sdram_s1_readdata;                       // sdram:za_data -> mm_interconnect_0:sdram_s1_readdata
+	wire         mm_interconnect_0_sdram_s1_waitrequest;                    // sdram:za_waitrequest -> mm_interconnect_0:sdram_s1_waitrequest
+	wire  [21:0] mm_interconnect_0_sdram_s1_address;                        // mm_interconnect_0:sdram_s1_address -> sdram:az_addr
+	wire         mm_interconnect_0_sdram_s1_read;                           // mm_interconnect_0:sdram_s1_read -> sdram:az_rd_n
+	wire   [1:0] mm_interconnect_0_sdram_s1_byteenable;                     // mm_interconnect_0:sdram_s1_byteenable -> sdram:az_be_n
+	wire         mm_interconnect_0_sdram_s1_readdatavalid;                  // sdram:za_valid -> mm_interconnect_0:sdram_s1_readdatavalid
+	wire         mm_interconnect_0_sdram_s1_write;                          // mm_interconnect_0:sdram_s1_write -> sdram:az_wr_n
+	wire  [15:0] mm_interconnect_0_sdram_s1_writedata;                      // mm_interconnect_0:sdram_s1_writedata -> sdram:az_data
 	wire         irq_mapper_receiver0_irq;                                  // jtag_uart:av_irq -> irq_mapper:receiver0_irq
 	wire         irq_mapper_receiver1_irq;                                  // sys_clk_timer:irq -> irq_mapper:receiver1_irq
 	wire  [31:0] cpu_d_irq_irq;                                             // irq_mapper:sender_irq -> cpu:d_irq
-	wire         rst_controller_reset_out_reset;                            // rst_controller:reset_out -> [cpu:reset_n, irq_mapper:reset, jtag_uart:rst_n, led_pio:reset_n, mm_interconnect_0:cpu_reset_n_reset_bridge_in_reset_reset, onchip_mem:reset, rst_translator:in_reset, sys_clk_timer:reset_n, sysid:reset_n]
-	wire         rst_controller_reset_out_reset_req;                        // rst_controller:reset_req -> [cpu:reset_req, onchip_mem:reset_req, rst_translator:reset_req_in]
+	wire         rst_controller_reset_out_reset;                            // rst_controller:reset_out -> [cpu:reset_n, irq_mapper:reset, jtag_uart:rst_n, led_pio:reset_n, mm_interconnect_0:cpu_reset_n_reset_bridge_in_reset_reset, rst_translator:in_reset, sdram:reset_n, sys_clk_timer:reset_n, sysid:reset_n]
+	wire         rst_controller_reset_out_reset_req;                        // rst_controller:reset_req -> [cpu:reset_req, rst_translator:reset_req_in]
 
 	first_nios2_system_cpu cpu (
 		.clk                                   (clk_clk),                                             //                       clk.clk
@@ -116,18 +127,27 @@ module first_nios2_system (
 		.out_port   (led_pio_external_connection_export)       // external_connection.export
 	);
 
-	first_nios2_system_onchip_mem onchip_mem (
-		.clk        (clk_clk),                                    //   clk1.clk
-		.address    (mm_interconnect_0_onchip_mem_s1_address),    //     s1.address
-		.clken      (mm_interconnect_0_onchip_mem_s1_clken),      //       .clken
-		.chipselect (mm_interconnect_0_onchip_mem_s1_chipselect), //       .chipselect
-		.write      (mm_interconnect_0_onchip_mem_s1_write),      //       .write
-		.readdata   (mm_interconnect_0_onchip_mem_s1_readdata),   //       .readdata
-		.writedata  (mm_interconnect_0_onchip_mem_s1_writedata),  //       .writedata
-		.byteenable (mm_interconnect_0_onchip_mem_s1_byteenable), //       .byteenable
-		.reset      (rst_controller_reset_out_reset),             // reset1.reset
-		.reset_req  (rst_controller_reset_out_reset_req),         //       .reset_req
-		.freeze     (1'b0)                                        // (terminated)
+	first_nios2_system_sdram sdram (
+		.clk            (clk_clk),                                  //   clk.clk
+		.reset_n        (~rst_controller_reset_out_reset),          // reset.reset_n
+		.az_addr        (mm_interconnect_0_sdram_s1_address),       //    s1.address
+		.az_be_n        (~mm_interconnect_0_sdram_s1_byteenable),   //      .byteenable_n
+		.az_cs          (mm_interconnect_0_sdram_s1_chipselect),    //      .chipselect
+		.az_data        (mm_interconnect_0_sdram_s1_writedata),     //      .writedata
+		.az_rd_n        (~mm_interconnect_0_sdram_s1_read),         //      .read_n
+		.az_wr_n        (~mm_interconnect_0_sdram_s1_write),        //      .write_n
+		.za_data        (mm_interconnect_0_sdram_s1_readdata),      //      .readdata
+		.za_valid       (mm_interconnect_0_sdram_s1_readdatavalid), //      .readdatavalid
+		.za_waitrequest (mm_interconnect_0_sdram_s1_waitrequest),   //      .waitrequest
+		.zs_addr        (sdram_wire_addr),                          //  wire.export
+		.zs_ba          (sdram_wire_ba),                            //      .export
+		.zs_cas_n       (sdram_wire_cas_n),                         //      .export
+		.zs_cke         (sdram_wire_cke),                           //      .export
+		.zs_cs_n        (sdram_wire_cs_n),                          //      .export
+		.zs_dq          (sdram_wire_dq),                            //      .export
+		.zs_dqm         (sdram_wire_dqm),                           //      .export
+		.zs_ras_n       (sdram_wire_ras_n),                         //      .export
+		.zs_we_n        (sdram_wire_we_n)                           //      .export
 	);
 
 	first_nios2_system_sys_clk_timer sys_clk_timer (
@@ -184,13 +204,15 @@ module first_nios2_system (
 		.led_pio_s1_readdata                     (mm_interconnect_0_led_pio_s1_readdata),                     //                                  .readdata
 		.led_pio_s1_writedata                    (mm_interconnect_0_led_pio_s1_writedata),                    //                                  .writedata
 		.led_pio_s1_chipselect                   (mm_interconnect_0_led_pio_s1_chipselect),                   //                                  .chipselect
-		.onchip_mem_s1_address                   (mm_interconnect_0_onchip_mem_s1_address),                   //                     onchip_mem_s1.address
-		.onchip_mem_s1_write                     (mm_interconnect_0_onchip_mem_s1_write),                     //                                  .write
-		.onchip_mem_s1_readdata                  (mm_interconnect_0_onchip_mem_s1_readdata),                  //                                  .readdata
-		.onchip_mem_s1_writedata                 (mm_interconnect_0_onchip_mem_s1_writedata),                 //                                  .writedata
-		.onchip_mem_s1_byteenable                (mm_interconnect_0_onchip_mem_s1_byteenable),                //                                  .byteenable
-		.onchip_mem_s1_chipselect                (mm_interconnect_0_onchip_mem_s1_chipselect),                //                                  .chipselect
-		.onchip_mem_s1_clken                     (mm_interconnect_0_onchip_mem_s1_clken),                     //                                  .clken
+		.sdram_s1_address                        (mm_interconnect_0_sdram_s1_address),                        //                          sdram_s1.address
+		.sdram_s1_write                          (mm_interconnect_0_sdram_s1_write),                          //                                  .write
+		.sdram_s1_read                           (mm_interconnect_0_sdram_s1_read),                           //                                  .read
+		.sdram_s1_readdata                       (mm_interconnect_0_sdram_s1_readdata),                       //                                  .readdata
+		.sdram_s1_writedata                      (mm_interconnect_0_sdram_s1_writedata),                      //                                  .writedata
+		.sdram_s1_byteenable                     (mm_interconnect_0_sdram_s1_byteenable),                     //                                  .byteenable
+		.sdram_s1_readdatavalid                  (mm_interconnect_0_sdram_s1_readdatavalid),                  //                                  .readdatavalid
+		.sdram_s1_waitrequest                    (mm_interconnect_0_sdram_s1_waitrequest),                    //                                  .waitrequest
+		.sdram_s1_chipselect                     (mm_interconnect_0_sdram_s1_chipselect),                     //                                  .chipselect
 		.sys_clk_timer_s1_address                (mm_interconnect_0_sys_clk_timer_s1_address),                //                  sys_clk_timer_s1.address
 		.sys_clk_timer_s1_write                  (mm_interconnect_0_sys_clk_timer_s1_write),                  //                                  .write
 		.sys_clk_timer_s1_readdata               (mm_interconnect_0_sys_clk_timer_s1_readdata),               //                                  .readdata
