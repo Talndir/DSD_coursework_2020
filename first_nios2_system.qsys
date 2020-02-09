@@ -231,7 +231,7 @@
   <parameter name="mpu_numOfInstRegion" value="8" />
   <parameter name="mpu_useLimit" value="false" />
   <parameter name="muldiv_divider" value="false" />
-  <parameter name="muldiv_multiplierType" value="NoneSmall" />
+  <parameter name="muldiv_multiplierType" value="EmbeddedMulFast" />
   <parameter name="ocimem_ramBlockType" value="Automatic" />
   <parameter name="regfile_ramBlockType" value="Automatic" />
   <parameter name="resetOffset" value="0" />

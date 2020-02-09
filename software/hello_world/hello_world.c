@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include <math.h>
 
-#define TEST 1
+#define TEST 2
 
 #if TEST == 1
 
@@ -73,10 +73,10 @@ int main()
 
 	// Run 10 times
 	long unsigned sum = 0;
-	for (unsigned int i = 0; i < 10; ++i)
+	for (unsigned int i = 0; i < 5; ++i)
 		sum += runOnce();
-	sum /= 10;
-	printf("Average time: %lu\n", sum);
+	sum /= 5;
+	printf("Average time: %lums\n", sum);
 
 	return 0;
 }
