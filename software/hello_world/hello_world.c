@@ -9,6 +9,9 @@
 #include <math.h>
 #include <tgmath.h>
 
+#define FP_ADD(A,B) __builtin_custom_fnff(0x0,(A),(B))
+#define FP_MULT(A,B) __builtin_custom_fnff(0x1,(A),(B))
+
 // NORMAL, LOOKUP or TAYLOR
 #define NORMAL
 
@@ -133,6 +136,13 @@ long unsigned runOnce()
 
 int main()
 {
+	float a = -2.f, b = 3.2f;
+	float c = FP_ADD(a, b);
+	float d = FP_MULT(a, b);
+	printf("%f + %f = %f\n", a, b, c);
+	printf("%f * %f = %f\n", a, b, d);
+	return 0;
+
 	printf("Task 5!\n");
 	printf("Test %u\n", TEST);
 #ifdef LOOKUP

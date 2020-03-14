@@ -495,14 +495,6 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 504 72)
-	(pt 600 72)
-)
-(connector
-	(pt 600 72)
-	(pt 600 192)
-)
-(connector
 	(pt 320 72)
 	(pt 344 72)
 )
@@ -517,5 +509,17 @@ refer to the applicable agreement for further details.
 (connector
 	(pt 832 112)
 	(pt 832 24)
+)
+(connector
+	(pt 504 72)
+	(pt 560 72)
+)
+(connector
+	(pt 600 192)
+	(pt 560 192)
+)
+(connector
+	(pt 560 192)
+	(pt 560 72)
 )
 (junction (pt 344 72))
