@@ -15,7 +15,7 @@
 // NORMAL, LOOKUP or TAYLOR
 #define NORMAL
 
-#define TEST 3
+#define TEST 2
 
 #if TEST == 1
 
@@ -109,11 +109,13 @@ float sumVector(float *x, int length)
 	for (unsigned int i = 0; i < length; ++i)
 	{
 #ifdef NORMAL
-		c = cos((x[i] / 128.f) - 1.f);
+		//c = cos((x[i] / 128.f) - 1.f);
+		c = cos(FP_ADD(-1.f, FP_MULT(x[i], 0.0078125f)));
 #else
 		c = cosine((x[i] / 128.f) - 1.f);
 #endif
-		sum += x[i] * (0.5f + x[i] * c);
+		//sum += x[i] * (0.5f + x[i] * c);
+		sum += FP_MULT(x[i], FP_ADD(0.5f, FP_MULT(x[i], c)));
 	}
 
 	return sum;
@@ -136,13 +138,6 @@ long unsigned runOnce()
 
 int main()
 {
-	float a = -2.f, b = 3.2f;
-	float c = FP_ADD(a, b);
-	float d = FP_MULT(a, b);
-	printf("%f + %f = %f\n", a, b, c);
-	printf("%f * %f = %f\n", a, b, d);
-	return 0;
-
 	printf("Task 5!\n");
 	printf("Test %u\n", TEST);
 #ifdef LOOKUP
