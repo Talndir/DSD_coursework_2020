@@ -1,0 +1,92 @@
+`timescale 1 ps / 1 ps
+
+/*
+	Takes 1 + 3N cycles per instruction.
+	Throughput is 1 instruction per cycle.
+*/
+
+module cordic (
+	input 	wire		clk,
+	input	wire	[31:0]	theta,
+	output	reg	[31:0]	result
+	);
+
+	parameter 	N = 15;
+	wire 	[31:0]	ARCTAN_TABLE	[N:0];
+
+        assign  ARCTAN_TABLE[ 0] = 32'h3f490fdb;
+        assign  ARCTAN_TABLE[ 1] = 32'h3eed6338;
+        assign  ARCTAN_TABLE[ 2] = 32'h3e7adbb0;
+        assign  ARCTAN_TABLE[ 3] = 32'h3dfeadd5;
+        assign  ARCTAN_TABLE[ 4] = 32'h3d7faade;
+        assign  ARCTAN_TABLE[ 5] = 32'h3cffeaae;
+        assign  ARCTAN_TABLE[ 6] = 32'h3c7ffaab;
+        assign  ARCTAN_TABLE[ 7] = 32'h3bfffeab;
+        assign  ARCTAN_TABLE[ 8] = 32'h3b7fffab;
+        assign  ARCTAN_TABLE[ 9] = 32'h3affffeb;
+        assign  ARCTAN_TABLE[10] = 32'h3a7ffffb;
+        assign  ARCTAN_TABLE[11] = 32'h39ffffff;
+        assign  ARCTAN_TABLE[12] = 32'h39800000;
+        assign  ARCTAN_TABLE[13] = 32'h39000000;
+        assign  ARCTAN_TABLE[14] = 32'h38800000;
+        assign  ARCTAN_TABLE[15] = 32'h38000000;
+
+	reg	[31:0]	x [N:0];
+	reg	[31:0]	y [N:0];
+	reg	[31:0]	z [N:0];
+
+	reg [2:0] counter;
+	reg clock;
+
+	initial begin
+		x[0] = 32'h3f1b74ee;
+		y[0] = 0;
+		counter = 1;
+		clock = 0;
+	end
+
+	always @ (posedge clk) begin
+		z[0] <= theta;
+		result <= x[N];
+	end
+
+	genvar i;
+	generate
+	for (i = 0; i < N; i = i + 1) begin : loop
+		wire [31:0] xb = {y[i][31] ^ ~z[i][31], y[i][30:23] - i[7:0], y[i][22:0]};
+		wire [31:0] yb = {x[i][31] ^  z[i][31], x[i][30:23] - i[7:0], x[i][22:0]};
+		wire [31:0] zb = ARCTAN_TABLE[i] ^ (~z[i] & (1 << 31));
+
+		fp_add add_x (
+			.clk(clk),
+			.areset(32'b0),
+			.a(x[i]),
+			.b(xb),
+			.q()
+		);
+
+		fp_add add_y (
+			.clk(clk),
+			.areset(32'b0),
+			.a(y[i]),
+			.b(yb),
+			.q()
+		);
+
+		fp_add add_z (
+			.clk(clk),
+			.areset(32'b0),
+			.a(z[i]),
+			.b(zb),
+			.q()
+		);
+
+		always @ (posedge clk) begin
+			x[i+1] <= add_x.q;
+			y[i+1] <= add_y.q;
+			z[i+1] <= add_z.q;
+		end
+	end
+	endgenerate
+	
+endmodule
