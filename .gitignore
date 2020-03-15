@@ -20,3 +20,5 @@ unsaved
 *.objdump
 *.map
 summary.html
+
+*.bak
