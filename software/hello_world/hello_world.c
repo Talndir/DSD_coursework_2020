@@ -11,6 +11,7 @@
 
 #define FP_ADD(A,B) __builtin_custom_fnff(0x0,(A),(B))
 #define FP_MULT(A,B) __builtin_custom_fnff(0x1,(A),(B))
+#define COS(A) __builtin_custom_fnf(0x2,(A))
 
 // NORMAL, LOOKUP or TAYLOR
 #define NORMAL
@@ -110,7 +111,8 @@ float sumVector(float *x, int length)
 	{
 #ifdef NORMAL
 		//c = cos((x[i] / 128.f) - 1.f);
-		c = cos(FP_ADD(-1.f, FP_MULT(x[i], 0.0078125f)));
+		//c = cos(FP_ADD(-1.f, FP_MULT(x[i], 0.0078125f)));
+		c = COS(FP_ADD(-1.f, FP_MULT(x[i], 0.0078125f)));
 #else
 		c = cosine((x[i] / 128.f) - 1.f);
 #endif
@@ -138,6 +140,14 @@ long unsigned runOnce()
 
 int main()
 {
+	float x = 0.25f;
+	float c = COS(x);
+	printf("cos(0x%x) = 0x%x\n", *((unsigned int*)&x), *((unsigned int*)&c));
+	x = 0.5f;
+	c = COS(x);
+	printf("cos(0x%x) = 0x%x\n", *((unsigned int*)&x), *((unsigned int*)&c));
+	return 0;
+
 	printf("Task 5!\n");
 	printf("Test %u\n", TEST);
 #ifdef LOOKUP

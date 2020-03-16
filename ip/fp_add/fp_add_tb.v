@@ -1,17 +1,19 @@
 `timescale 1 ps / 1 ps
 
-module cordic_tb ();
+module tb ();
 
 reg		clk;
-reg		reset;
-reg	[31:0]	theta;
-wire	[31:0]	result;
+reg		areset;
+reg	[31:0]  a;
+reg	[31:0]  b;
+wire 	[31:0] 	q;
 
-cordic cord (
+fp_add add (
 	.clk(clk),
-	.reset(reset),
-	.theta(theta),
-	.result(result)
+	.areset(areset),
+	.a(a),
+	.b(b),
+	.q(q)
 );
 
 always #100 clk = ~clk;
@@ -20,13 +22,13 @@ initial
 begin
 	$display($time, " << Starting Simulation >> ");
 	clk = 0;
-	//theta = 32'h00000000;
-	#10000;
-	theta = 32'h3f000000;
-	#10000;
+	areset = 0;
+	#100;
+	a = 32'hbf800000;
+	b = 32'h3f000000;
+	#1000;
 	$display($time, " << Simulation Complete>> ");
 	$display($time, " << Simulation Complete>> ");
-
 	$stop;
 end
 

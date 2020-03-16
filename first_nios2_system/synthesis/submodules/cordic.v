@@ -1,7 +1,7 @@
 `timescale 1 ps / 1 ps
 
 /*
-	Takes 3N + 2 cycles per instruction.
+	Takes 1 + 3N cycles per instruction.
 	Throughput is 1 instruction per cycle.
 */
 
@@ -36,11 +36,24 @@ module cordic (
 	reg	[31:0]	y [N:0];
 	reg	[31:0]	z [N:0];
 
+	initial begin
+		x[0] = 32'h3f1b74ee;
+		y[0] = 0;
+		result = 0;
+	end
+
 	always @ (posedge clk) begin
 		z[0] <= theta;
-		x[0] <= 32'h3f1b74ee;
-		y[0] <= 0;
-		result <= x[N];
+		//result <= x[N];
+		result <= z[N];
+/*
+		if (x[0] != theta) begin
+			result <= 0;
+			x[0] <= theta;
+		end else begin
+			result <= result + 1;
+		end
+*/
 	end
 
 	genvar i;
@@ -49,6 +62,7 @@ module cordic (
 		wire [31:0] xb = {y[i][31] ^ ~z[i][31], y[i][30:23] - i[7:0], y[i][22:0]};
 		wire [31:0] yb = {x[i][31] ^  z[i][31], x[i][30:23] - i[7:0], x[i][22:0]};
 		wire [31:0] zb = ARCTAN_TABLE[i] ^ (~z[i] & (1 << 31));
+		//wire [31:0] zb = 32'h3f800000;
 		wire [31:0] xout, yout, zout;
 
 		fp_add add_x (
@@ -79,6 +93,7 @@ module cordic (
 			x[i+1] <= xout;
 			y[i+1] <= yout;
 			z[i+1] <= zout;
+			//z[i+1] <= z[i];
 		end
 	end
 	endgenerate
