@@ -12,6 +12,7 @@
 #define FP_ADD(A,B) __builtin_custom_fnff(0x0,(A),(B))
 #define FP_MULT(A,B) __builtin_custom_fnff(0x1,(A),(B))
 #define COS(A) __builtin_custom_fnf(0x2,(A))
+#define EXPR(A) __builtin_custom_fnf(0x3,(A))
 
 // NORMAL, LOOKUP or TAYLOR
 #define NORMAL
@@ -140,12 +141,10 @@ long unsigned runOnce()
 
 int main()
 {
-	float x = 0.25f;
+	float x = 0.5f;
 	float c = COS(x);
-	printf("cos(0x%x) = 0x%x\n", *((unsigned int*)&x), *((unsigned int*)&c));
-	x = 0.5f;
-	c = COS(x);
-	printf("cos(0x%x) = 0x%x\n", *((unsigned int*)&x), *((unsigned int*)&c));
+	float e = EXPR(x);
+	printf("x = %f, cos(x) = %f, expr(x) = %f\n", x, c, e);
 	return 0;
 
 	printf("Task 5!\n");
