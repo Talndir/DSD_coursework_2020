@@ -13,7 +13,7 @@
 #define FP_MULT(A,B) __builtin_custom_fnff(0x1,(A),(B))
 
 // NORMAL, LOOKUP or TAYLOR
-#define NORMAL
+#define LOOKUP
 
 #define TEST 2
 
@@ -109,12 +109,10 @@ float sumVector(float *x, int length)
 	for (unsigned int i = 0; i < length; ++i)
 	{
 #ifdef NORMAL
-		//c = cos((x[i] / 128.f) - 1.f);
 		c = cos(FP_ADD(-1.f, FP_MULT(x[i], 0.0078125f)));
 #else
 		c = cosine((x[i] / 128.f) - 1.f);
 #endif
-		//sum += x[i] * (0.5f + x[i] * c);
 		sum += FP_MULT(x[i], FP_ADD(0.5f, FP_MULT(x[i], c)));
 	}
 
@@ -138,7 +136,7 @@ long unsigned runOnce()
 
 int main()
 {
-	printf("Task 5!\n");
+	printf("Task 6!\n");
 	printf("Test %u\n", TEST);
 #ifdef LOOKUP
 	initLookup();
