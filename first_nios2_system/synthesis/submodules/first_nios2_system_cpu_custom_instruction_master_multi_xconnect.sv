@@ -67,44 +67,6 @@ module first_nios2_system_cpu_custom_instruction_master_multi_xconnect
     output          ci_master1_start,
     input           ci_master1_done,
 
-    output [31 : 0] ci_master2_dataa,
-    output [31 : 0] ci_master2_datab,
-    input  [31 : 0] ci_master2_result,
-    output [ 7 : 0] ci_master2_n,
-    output          ci_master2_readra,
-    output          ci_master2_readrb,
-    output          ci_master2_writerc,
-    output [ 4 : 0] ci_master2_a,
-    output [ 4 : 0] ci_master2_b,
-    output [ 4 : 0] ci_master2_c,
-    output [31 : 0] ci_master2_ipending,
-    output          ci_master2_estatus,
-    output          ci_master2_clk,   
-    output          ci_master2_clken,
-    output          ci_master2_reset, 
-    output          ci_master2_reset_req,
-    output          ci_master2_start,
-    input           ci_master2_done,
-
-    output [31 : 0] ci_master3_dataa,
-    output [31 : 0] ci_master3_datab,
-    input  [31 : 0] ci_master3_result,
-    output [ 7 : 0] ci_master3_n,
-    output          ci_master3_readra,
-    output          ci_master3_readrb,
-    output          ci_master3_writerc,
-    output [ 4 : 0] ci_master3_a,
-    output [ 4 : 0] ci_master3_b,
-    output [ 4 : 0] ci_master3_c,
-    output [31 : 0] ci_master3_ipending,
-    output          ci_master3_estatus,
-    output          ci_master3_clk,   
-    output          ci_master3_clken,
-    output          ci_master3_reset, 
-    output          ci_master3_reset_req,
-    output          ci_master3_start,
-    input           ci_master3_done,
-
 
     // -------------------
     // Custom instruction slave
@@ -132,8 +94,6 @@ module first_nios2_system_cpu_custom_instruction_master_multi_xconnect
 
     wire select0;
     wire select1;
-    wire select2;
-    wire select3;
 
     // -------------------------------------------------------
     // Wire non-control signals through to each master
@@ -164,64 +124,24 @@ module first_nios2_system_cpu_custom_instruction_master_multi_xconnect
     assign  ci_master1_reset_req = ci_slave_reset_req;
     assign  ci_master1_reset    = ci_slave_reset;
 
-    assign  ci_master2_dataa    = ci_slave_dataa;
-    assign  ci_master2_datab    = ci_slave_datab;
-    assign  ci_master2_n        = ci_slave_n;
-    assign  ci_master2_a        = ci_slave_a;
-    assign  ci_master2_b        = ci_slave_b;
-    assign  ci_master2_c        = ci_slave_c;
-    assign  ci_master2_ipending = ci_slave_ipending;
-    assign  ci_master2_estatus  = ci_slave_estatus;
-    assign  ci_master2_clk      = ci_slave_clk;
-    assign  ci_master2_clken    = ci_slave_clken;
-    assign  ci_master2_reset_req = ci_slave_reset_req;
-    assign  ci_master2_reset    = ci_slave_reset;
-
-    assign  ci_master3_dataa    = ci_slave_dataa;
-    assign  ci_master3_datab    = ci_slave_datab;
-    assign  ci_master3_n        = ci_slave_n;
-    assign  ci_master3_a        = ci_slave_a;
-    assign  ci_master3_b        = ci_slave_b;
-    assign  ci_master3_c        = ci_slave_c;
-    assign  ci_master3_ipending = ci_slave_ipending;
-    assign  ci_master3_estatus  = ci_slave_estatus;
-    assign  ci_master3_clk      = ci_slave_clk;
-    assign  ci_master3_clken    = ci_slave_clken;
-    assign  ci_master3_reset_req = ci_slave_reset_req;
-    assign  ci_master3_reset    = ci_slave_reset;
-
 
     // -------------------------------------------------------
     // Figure out which output is selected, and use that to
     // gate control signals
     // -------------------------------------------------------
-    assign select0 = ci_slave_n >= 2 && ci_slave_n < 3;
+    assign select0 = ci_slave_n >= 3 && ci_slave_n < 4;
 
     assign ci_master0_readra  = (select0 && ci_slave_readra);
     assign ci_master0_readrb  = (select0 && ci_slave_readrb);
     assign ci_master0_writerc = (select0 && ci_slave_writerc);
     assign ci_master0_start   = (select0 && ci_slave_start);
 
-    assign select1 = ci_slave_n >= 3 && ci_slave_n < 4;
+    assign select1 = ci_slave_n >= 0 && ci_slave_n < 1;
 
     assign ci_master1_readra  = (select1 && ci_slave_readra);
     assign ci_master1_readrb  = (select1 && ci_slave_readrb);
     assign ci_master1_writerc = (select1 && ci_slave_writerc);
     assign ci_master1_start   = (select1 && ci_slave_start);
-
-    assign select2 = ci_slave_n >= 0 && ci_slave_n < 1;
-
-    assign ci_master2_readra  = (select2 && ci_slave_readra);
-    assign ci_master2_readrb  = (select2 && ci_slave_readrb);
-    assign ci_master2_writerc = (select2 && ci_slave_writerc);
-    assign ci_master2_start   = (select2 && ci_slave_start);
-
-    assign select3 = ci_slave_n >= 1 && ci_slave_n < 2;
-
-    assign ci_master3_readra  = (select3 && ci_slave_readra);
-    assign ci_master3_readrb  = (select3 && ci_slave_readrb);
-    assign ci_master3_writerc = (select3 && ci_slave_writerc);
-    assign ci_master3_start   = (select3 && ci_slave_start);
 
 
     // -------------------------------------------------------
@@ -230,14 +150,10 @@ module first_nios2_system_cpu_custom_instruction_master_multi_xconnect
     // -------------------------------------------------------
     assign ci_slave_result = {32{ select0 }} & ci_master0_result
          | {32{ select1 }} & ci_master1_result
-         | {32{ select2 }} & ci_master2_result
-         | {32{ select3 }} & ci_master3_result
     ;
 
     assign ci_slave_done = select0 & ci_master0_done
          | select1 & ci_master1_done
-         | select2 & ci_master2_done
-         | select3 & ci_master3_done
     ;
 
 endmodule

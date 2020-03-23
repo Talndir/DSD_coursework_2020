@@ -1,5 +1,9 @@
 `timescale 1 ps / 1 ps
 
+//`include "../fp_add/fp_add.v"
+//`include "../fp_mult/fp_mult.v"
+//`include "../cordic/cordic.v"
+
 /*
 	Takes 56 cycles per instruction.
 	Not pipelined.
@@ -12,7 +16,7 @@ module expr (
 	output	reg	[31:0]	result
 	);
 
-	wire [31:0] add1_a = {x[31], x[30:23] - 7, x[22:0]};
+	wire [31:0] add1_a = {x[31], x[30:23] - 8'h07, x[22:0]};
 	wire [31:0] add1_to_cos, cos_to_mult1, mult1_to_add2, add2_to_mult2, mult2_q;
 
 	fp_add add1 (
@@ -55,7 +59,8 @@ module expr (
 	);
 
 	always @ (posedge clk) begin
-		result <= mult2_q;
+		//result <= mult2_q;
+		result <= 1;
 	end
 
 endmodule

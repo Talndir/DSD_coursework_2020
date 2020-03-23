@@ -14,10 +14,7 @@
 #define COS(A) __builtin_custom_fnf(0x2,(A))
 #define EXPR(A) __builtin_custom_fnf(0x3,(A))
 
-// NORMAL, LOOKUP or TAYLOR
-#define NORMAL
-
-#define TEST 2
+#define TEST 3
 
 #if TEST == 1
 
@@ -39,60 +36,6 @@
 
 #endif
 
-#ifdef LOOKUP
-
-#define TABLE_SIZE 8192
-#define PI 3.14159265359f
-#define HALF_PI 1.57079632679f
-#define TWO_PI 6.28318530718f
-
-float lookupTable[TABLE_SIZE];
-
-void initLookup()
-{
-	for (unsigned int i = 0; i < TABLE_SIZE; ++i)
-		lookupTable[i] = cos(HALF_PI * (float)i / (float)TABLE_SIZE);
-}
-
-float cosine(float x)
-{
-	x = fmod(fabs(x), TWO_PI);
-	if (x > PI)
-		x = PI - x;
-	if (x < HALF_PI)
-		return lookupTable[(int)(x * (float)TABLE_SIZE / HALF_PI)];
-	else
-		return -lookupTable[(int)((HALF_PI - x) * (float)TABLE_SIZE / HALF_PI)];
-}
-
-#endif
-
-#ifdef TAYLOR
-
-#define TWO_PI 6.28318530718f
-#define PI_BY_FOUR 0.78539816339f
-#define HALF_SQRT_TWO 0.70710678118f
-
-float cosine(float x)
-{
-	x = fmod(fabs(x), TWO_PI) - PI_BY_FOUR;
-	float x2 = x * x;
-	float x3 = x2 * x;
-	float x4 = x3 * x;
-	float x5 = x4 * x;
-
-	float sum = HALF_SQRT_TWO;
-	sum -= x * HALF_SQRT_TWO;
-	sum -= x2 * 0.5 * HALF_SQRT_TWO;
-	sum += x3 * (1.f / 6.f) * HALF_SQRT_TWO;
-	sum += x4 * (1.f / 24.f) * HALF_SQRT_TWO;
-	sum -= x5 * (1.f / 120.f) * HALF_SQRT_TWO;
-
-	return sum;
-}
-
-#endif
-
 // Generates the vector x and stores it in the memory
 void generateVector(float *x, int start, int length)
 {
@@ -109,17 +52,7 @@ float sumVector(float *x, int length)
 	float sum = 0.f;
 	float c;
 	for (unsigned int i = 0; i < length; ++i)
-	{
-#ifdef NORMAL
-		//c = cos((x[i] / 128.f) - 1.f);
-		//c = cos(FP_ADD(-1.f, FP_MULT(x[i], 0.0078125f)));
-		c = COS(FP_ADD(-1.f, FP_MULT(x[i], 0.0078125f)));
-#else
-		c = cosine((x[i] / 128.f) - 1.f);
-#endif
-		//sum += x[i] * (0.5f + x[i] * c);
-		sum += FP_MULT(x[i], FP_ADD(0.5f, FP_MULT(x[i], c)));
-	}
+		sum = FP_ADD(sum, EXPR(x[i]));
 
 	return sum;
 }
@@ -141,13 +74,7 @@ long unsigned runOnce()
 
 int main()
 {
-	float x = 0.5f;
-	float c = COS(x);
-	float e = EXPR(x);
-	printf("x = %f, cos(x) = %f, expr(x) = %f\n", x, c, e);
-	return 0;
-
-	printf("Task 5!\n");
+	printf("Task 7!\n");
 	printf("Test %u\n", TEST);
 #ifdef LOOKUP
 	initLookup();

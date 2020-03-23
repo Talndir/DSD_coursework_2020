@@ -232,12 +232,10 @@
    dir="end" />
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
  <interface name="sdram_wire" internal="sdram.wire" type="conduit" dir="end" />
- <module name="ci_cos_0" kind="ci_cos" version="1.0" enabled="1">
-  <parameter name="N" value="15" />
- </module>
+ <module name="ci_cos_0" kind="ci_cos" version="1.0" enabled="0" />
  <module name="ci_expr_0" kind="ci_expr" version="1.0" enabled="1" />
  <module name="ci_fp_add_0" kind="ci_fp_add" version="1.0" enabled="1" />
- <module name="ci_fp_mult_0" kind="ci_fp_mult" version="1.0" enabled="1" />
+ <module name="ci_fp_mult_0" kind="ci_fp_mult" version="1.0" enabled="0" />
  <module name="clk_0" kind="clock_source" version="18.1" enabled="1">
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="clockFrequencyKnown" value="true" />
@@ -252,7 +250,7 @@
   <parameter name="cpuID" value="0" />
   <parameter name="cpuID_stored" value="0" />
   <parameter name="cpuReset" value="false" />
-  <parameter name="customInstSlavesSystemInfo"><![CDATA[<info><slave name="ci_fp_add_0" baseAddress="0" addressSpan="1" clockCycleType="MULTICYCLE" /><slave name="ci_cos_0" baseAddress="2" addressSpan="1" clockCycleType="MULTICYCLE" /><slave name="ci_fp_mult_0" baseAddress="1" addressSpan="1" clockCycleType="MULTICYCLE" /><slave name="ci_expr_0" baseAddress="3" addressSpan="1" clockCycleType="MULTICYCLE" /></info>]]></parameter>
+  <parameter name="customInstSlavesSystemInfo"><![CDATA[<info><slave name="ci_fp_add_0" baseAddress="0" addressSpan="1" clockCycleType="MULTICYCLE" /><slave name="ci_expr_0" baseAddress="3" addressSpan="1" clockCycleType="MULTICYCLE" /></info>]]></parameter>
   <parameter name="dataAddrWidth" value="25" />
   <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='sdram.s1' start='0x800000' end='0x1000000' /><slave name='cpu.jtag_debug_module' start='0x1000800' end='0x1001000' /><slave name='sys_clk_timer.s1' start='0x1001000' end='0x1001020' /><slave name='led_pio.s1' start='0x1001020' end='0x1001030' /><slave name='sysid.control_slave' start='0x1001030' end='0x1001038' /><slave name='jtag_uart.avalon_jtag_slave' start='0x1001038' end='0x1001040' /></address-map>]]></parameter>
   <parameter name="dcache_bursts" value="false" />

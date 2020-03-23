@@ -1,5 +1,7 @@
 `timescale 1 ps / 1 ps
 
+`include "../fp_add/fp_add.v"
+
 /*
 	Takes 3N + 2 cycles per instruction.
 	Throughput is 1 instruction per cycle.
@@ -12,8 +14,8 @@ module cordic (
 	output	reg	[31:0]	result
 	);
 
-	parameter 	N = 15;
-	wire 	[31:0]	ARCTAN_TABLE	[N:0];
+	localparam N = 9;
+	wire 	[31:0]	ARCTAN_TABLE	[(N-1):0];
 
         assign  ARCTAN_TABLE[ 0] = 32'h3f490fdb;
         assign  ARCTAN_TABLE[ 1] = 32'h3eed6338;
@@ -23,14 +25,13 @@ module cordic (
         assign  ARCTAN_TABLE[ 5] = 32'h3cffeaae;
         assign  ARCTAN_TABLE[ 6] = 32'h3c7ffaab;
         assign  ARCTAN_TABLE[ 7] = 32'h3bfffeab;
-        assign  ARCTAN_TABLE[ 8] = 32'h3b7fffab;
+        assign  ARCTAN_TABLE[ 8] = 32'h3b7fffab;/*
         assign  ARCTAN_TABLE[ 9] = 32'h3affffeb;
         assign  ARCTAN_TABLE[10] = 32'h3a7ffffb;
         assign  ARCTAN_TABLE[11] = 32'h39ffffff;
         assign  ARCTAN_TABLE[12] = 32'h39800000;
         assign  ARCTAN_TABLE[13] = 32'h39000000;
-        assign  ARCTAN_TABLE[14] = 32'h38800000;
-        assign  ARCTAN_TABLE[15] = 32'h38000000;
+        assign  ARCTAN_TABLE[14] = 32'h38800000;*/
 
 	reg	[31:0]	x [N:0];
 	reg	[31:0]	y [N:0];
