@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'first_nios2_system'
  * SOPC Builder design path: ../../first_nios2_system.sopcinfo
  *
- * Generated: Mon Mar 23 02:11:56 GMT 2020
+ * Generated: Mon Mar 23 19:12:11 GMT 2020
  */
 
 /*
@@ -62,16 +62,16 @@
 
 #define ALT_CPU_ARCHITECTURE "altera_nios2_qsys"
 #define ALT_CPU_BIG_ENDIAN 0
-#define ALT_CPU_BREAK_ADDR 0x01000820
+#define ALT_CPU_BREAK_ADDR 0x00800820
 #define ALT_CPU_CPU_FREQ 50000000u
 #define ALT_CPU_CPU_ID_SIZE 1
 #define ALT_CPU_CPU_ID_VALUE 0x00000000
 #define ALT_CPU_CPU_IMPLEMENTATION "small"
-#define ALT_CPU_DATA_ADDR_WIDTH 0x19
+#define ALT_CPU_DATA_ADDR_WIDTH 0x18
 #define ALT_CPU_DCACHE_LINE_SIZE 0
 #define ALT_CPU_DCACHE_LINE_SIZE_LOG2 0
 #define ALT_CPU_DCACHE_SIZE 0
-#define ALT_CPU_EXCEPTION_ADDR 0x00800020
+#define ALT_CPU_EXCEPTION_ADDR 0x00000020
 #define ALT_CPU_FLUSHDA_SUPPORTED
 #define ALT_CPU_FREQ 50000000
 #define ALT_CPU_HARDWARE_DIVIDE_PRESENT 0
@@ -83,9 +83,9 @@
 #define ALT_CPU_ICACHE_LINE_SIZE 32
 #define ALT_CPU_ICACHE_LINE_SIZE_LOG2 5
 #define ALT_CPU_ICACHE_SIZE 2048
-#define ALT_CPU_INST_ADDR_WIDTH 0x19
+#define ALT_CPU_INST_ADDR_WIDTH 0x18
 #define ALT_CPU_NAME "cpu"
-#define ALT_CPU_RESET_ADDR 0x00800000
+#define ALT_CPU_RESET_ADDR 0x00000000
 
 
 /*
@@ -94,16 +94,16 @@
  */
 
 #define NIOS2_BIG_ENDIAN 0
-#define NIOS2_BREAK_ADDR 0x01000820
+#define NIOS2_BREAK_ADDR 0x00800820
 #define NIOS2_CPU_FREQ 50000000u
 #define NIOS2_CPU_ID_SIZE 1
 #define NIOS2_CPU_ID_VALUE 0x00000000
 #define NIOS2_CPU_IMPLEMENTATION "small"
-#define NIOS2_DATA_ADDR_WIDTH 0x19
+#define NIOS2_DATA_ADDR_WIDTH 0x18
 #define NIOS2_DCACHE_LINE_SIZE 0
 #define NIOS2_DCACHE_LINE_SIZE_LOG2 0
 #define NIOS2_DCACHE_SIZE 0
-#define NIOS2_EXCEPTION_ADDR 0x00800020
+#define NIOS2_EXCEPTION_ADDR 0x00000020
 #define NIOS2_FLUSHDA_SUPPORTED
 #define NIOS2_HARDWARE_DIVIDE_PRESENT 0
 #define NIOS2_HARDWARE_MULTIPLY_PRESENT 1
@@ -114,8 +114,8 @@
 #define NIOS2_ICACHE_LINE_SIZE 32
 #define NIOS2_ICACHE_LINE_SIZE_LOG2 5
 #define NIOS2_ICACHE_SIZE 2048
-#define NIOS2_INST_ADDR_WIDTH 0x19
-#define NIOS2_RESET_ADDR 0x00800000
+#define NIOS2_INST_ADDR_WIDTH 0x18
+#define NIOS2_RESET_ADDR 0x00000000
 
 
 /*
@@ -123,10 +123,8 @@
  *
  */
 
-#define ALT_CI_CI_EXPR_0(A) __builtin_custom_ini(ALT_CI_CI_EXPR_0_N,(A))
-#define ALT_CI_CI_EXPR_0_N 0x3
-#define ALT_CI_CI_FP_ADD_0(A,B) __builtin_custom_inii(ALT_CI_CI_FP_ADD_0_N,(A),(B))
-#define ALT_CI_CI_FP_ADD_0_N 0x0
+#define ALT_CI_CI_FUNC_0(A,B) __builtin_custom_inii(ALT_CI_CI_FUNC_0_N,(A),(B))
+#define ALT_CI_CI_FUNC_0_N 0x1
 
 
 /*
@@ -136,12 +134,12 @@
 
 #define __ALTERA_AVALON_JTAG_UART
 #define __ALTERA_AVALON_NEW_SDRAM_CONTROLLER
+#define __ALTERA_AVALON_PERFORMANCE_COUNTER
 #define __ALTERA_AVALON_PIO
 #define __ALTERA_AVALON_SYSID_QSYS
 #define __ALTERA_AVALON_TIMER
 #define __ALTERA_NIOS2_QSYS
-#define __CI_EXPR
-#define __CI_FP_ADD
+#define __CI_FUNC
 
 
 /*
@@ -160,19 +158,19 @@
 #define ALT_NUM_INTERNAL_INTERRUPT_CONTROLLERS 1
 #define ALT_NUM_INTERRUPT_CONTROLLERS 1
 #define ALT_STDERR "/dev/jtag_uart"
-#define ALT_STDERR_BASE 0x1001038
+#define ALT_STDERR_BASE 0x801078
 #define ALT_STDERR_DEV jtag_uart
 #define ALT_STDERR_IS_JTAG_UART
 #define ALT_STDERR_PRESENT
 #define ALT_STDERR_TYPE "altera_avalon_jtag_uart"
 #define ALT_STDIN "/dev/jtag_uart"
-#define ALT_STDIN_BASE 0x1001038
+#define ALT_STDIN_BASE 0x801078
 #define ALT_STDIN_DEV jtag_uart
 #define ALT_STDIN_IS_JTAG_UART
 #define ALT_STDIN_PRESENT
 #define ALT_STDIN_TYPE "altera_avalon_jtag_uart"
 #define ALT_STDOUT "/dev/jtag_uart"
-#define ALT_STDOUT_BASE 0x1001038
+#define ALT_STDOUT_BASE 0x801078
 #define ALT_STDOUT_DEV jtag_uart
 #define ALT_STDOUT_IS_JTAG_UART
 #define ALT_STDOUT_PRESENT
@@ -196,7 +194,7 @@
  */
 
 #define ALT_MODULE_CLASS_jtag_uart altera_avalon_jtag_uart
-#define JTAG_UART_BASE 0x1001038
+#define JTAG_UART_BASE 0x801078
 #define JTAG_UART_IRQ 16
 #define JTAG_UART_IRQ_INTERRUPT_CONTROLLER_ID 0
 #define JTAG_UART_NAME "/dev/jtag_uart"
@@ -214,7 +212,7 @@
  */
 
 #define ALT_MODULE_CLASS_led_pio altera_avalon_pio
-#define LED_PIO_BASE 0x1001020
+#define LED_PIO_BASE 0x801060
 #define LED_PIO_BIT_CLEARING_EDGE_REGISTER 0
 #define LED_PIO_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define LED_PIO_CAPTURE 0
@@ -236,12 +234,27 @@
 
 
 /*
+ * performance_counter_0 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_performance_counter_0 altera_avalon_performance_counter
+#define PERFORMANCE_COUNTER_0_BASE 0x801020
+#define PERFORMANCE_COUNTER_0_HOW_MANY_SECTIONS 1
+#define PERFORMANCE_COUNTER_0_IRQ -1
+#define PERFORMANCE_COUNTER_0_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define PERFORMANCE_COUNTER_0_NAME "/dev/performance_counter_0"
+#define PERFORMANCE_COUNTER_0_SPAN 32
+#define PERFORMANCE_COUNTER_0_TYPE "altera_avalon_performance_counter"
+
+
+/*
  * sdram configuration
  *
  */
 
 #define ALT_MODULE_CLASS_sdram altera_avalon_new_sdram_controller
-#define SDRAM_BASE 0x800000
+#define SDRAM_BASE 0x0
 #define SDRAM_CAS_LATENCY 3
 #define SDRAM_CONTENTS_INFO
 #define SDRAM_INIT_NOP_DELAY 0.0
@@ -281,7 +294,7 @@
 
 #define ALT_MODULE_CLASS_sys_clk_timer altera_avalon_timer
 #define SYS_CLK_TIMER_ALWAYS_RUN 0
-#define SYS_CLK_TIMER_BASE 0x1001000
+#define SYS_CLK_TIMER_BASE 0x801040
 #define SYS_CLK_TIMER_COUNTER_SIZE 32
 #define SYS_CLK_TIMER_FIXED_PERIOD 0
 #define SYS_CLK_TIMER_FREQ 50000000
@@ -306,13 +319,13 @@
  */
 
 #define ALT_MODULE_CLASS_sysid altera_avalon_sysid_qsys
-#define SYSID_BASE 0x1001030
+#define SYSID_BASE 0x801070
 #define SYSID_ID 0
 #define SYSID_IRQ -1
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1584928779
+#define SYSID_TIMESTAMP 1584989793
 #define SYSID_TYPE "altera_avalon_sysid_qsys"
 
 #endif /* __SYSTEM_H_ */

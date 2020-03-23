@@ -1,0 +1,384 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/expr
+vcordic
+!s110 1584983497
+!i10b 1
+!s100 kDc][3fl>HC`TdV:@KQ@h3
+I0[lZo>Xz]Kk`h00;KX[PQ2
+Z0 VDg1SIo80bB@j0V0VzS_@n1
+Z1 dC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/func
+w1584982769
+8C:\Users\Omar\Documents\DSD\system_template_de1_soc\ip\cordic\cordic.v
+FC:\Users\Omar\Documents\DSD\system_template_de1_soc\ip\cordic\cordic.v
+L0 10
+Z2 OV;L;10.5b;63
+r1
+!s85 0
+31
+!s108 1584983497.000000
+!s107 C:\Users\Omar\Documents\DSD\system_template_de1_soc\ip\cordic\cordic.v|
+Z3 !s90 -reportprogress|300|-work|work|-stats=none|C:\Users\Omar\Documents\DSD\system_template_de1_soc\ip\cordic\cordic.v|
+!i113 1
+Z4 o-work work
+Z5 tCvgOpt 0
+Edspba_delay
+Z6 w1584950648
+Z7 DPx4 work 21 dspba_library_package 0 22 g5ge0<PbUA3NecLg[8;Cj3
+Z8 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z9 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+R1
+Z10 8C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_mult/fp_mult/dspba_library.vhd
+Z11 FC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_mult/fp_mult/dspba_library.vhd
+l0
+L18
+VJZ>XXZi]3nAML><T1OJmD2
+!s100 >TY9@l4a>2O5Wd_6jF4:g0
+Z12 OV;C;10.5b;63
+32
+Z13 !s110 1584957845
+!i10b 1
+Z14 !s108 1584957845.000000
+Z15 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_mult/fp_mult/dspba_library.vhd|
+Z16 !s107 C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_mult/fp_mult/dspba_library.vhd|
+!i113 1
+Z17 o-work work -2002 -explicit
+Z18 tExplicit 1 CvgOpt 0
+Adelay
+R7
+R8
+R9
+DEx4 work 11 dspba_delay 0 22 JZ>XXZi]3nAML><T1OJmD2
+l37
+L34
+VH[ibU<H]FT4<DCgHmIjFa0
+!s100 DAfPXKZhR<Ac>Wg8zYj1H3
+R12
+32
+R13
+!i10b 1
+R14
+R15
+R16
+!i113 1
+R17
+R18
+Pdspba_library_package
+R8
+R9
+R6
+R1
+8C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_mult/fp_mult/dspba_library_package.vhd
+FC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_mult/fp_mult/dspba_library_package.vhd
+l0
+L17
+Vg5ge0<PbUA3NecLg[8;Cj3
+!s100 @e;XE0e^oAdIdzY=Rc];H3
+R12
+32
+R13
+!i10b 1
+R14
+!s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_mult/fp_mult/dspba_library_package.vhd|
+!s107 C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_mult/fp_mult/dspba_library_package.vhd|
+!i113 1
+R17
+R18
+Edspba_pipe
+R6
+Z19 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+R8
+R9
+R1
+R10
+R11
+l0
+L343
+VhX_ehDHUhEGT`<4CLHDEW1
+!s100 ko3XcgZgdPgSD;SDR?Wmi2
+R12
+32
+R13
+!i10b 1
+R14
+R15
+R16
+!i113 1
+R17
+R18
+Artl
+R19
+R8
+R9
+DEx4 work 10 dspba_pipe 0 22 hX_ehDHUhEGT`<4CLHDEW1
+l362
+L356
+VF>oh8b`LjePmYI9jU_S=k2
+!s100 =]hA3YBJaaU9dNBMla?I?2
+R12
+32
+R13
+!i10b 1
+R14
+R15
+R16
+!i113 1
+R17
+R18
+Edspba_sync_reg
+R6
+R7
+R19
+R8
+R9
+R1
+R10
+R11
+l0
+L93
+V[2:MQ1fH@k]9VCDY^FzcN0
+!s100 G`[2Ci2RQWoL`zK>2h>oj2
+R12
+32
+R13
+!i10b 1
+R14
+R15
+R16
+!i113 1
+R17
+R18
+Async_reg
+R7
+R19
+R8
+R9
+DEx4 work 14 dspba_sync_reg 0 22 [2:MQ1fH@k]9VCDY^FzcN0
+l136
+L117
+VXjK]3?6G<i`:[Y@3Y=3Bo1
+!s100 D5ba3Bk5_`1nL6?j<JkK81
+R12
+32
+R13
+!i10b 1
+R14
+R15
+R16
+!i113 1
+R17
+R18
+vexpr
+!s110 1584960190
+!i10b 1
+!s100 l1_zz7c:7TI>:i8JbG5?A1
+I5k36dN?ngcVT@WT8G30hA0
+R0
+R1
+w1584950825
+8C:\Users\Omar\Documents\DSD\system_template_de1_soc\ip\expr\expr.v
+FC:\Users\Omar\Documents\DSD\system_template_de1_soc\ip\expr\expr.v
+L0 12
+R2
+r1
+!s85 0
+31
+!s108 1584960190.000000
+!s107 C:\Users\Omar\Documents\DSD\system_template_de1_soc\ip\expr\expr.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:\Users\Omar\Documents\DSD\system_template_de1_soc\ip\expr\expr.v|
+!i113 1
+R4
+R5
+vfp_add
+!s110 1584960521
+!i10b 1
+!s100 ?UF81Zd33>UU0aoSj_F=00
+I05`JUIoL4EV`3OM;8kVPA3
+R0
+R1
+R6
+8../fp_add/fp_add.v
+F../fp_add/fp_add.v
+L0 8
+R2
+r1
+!s85 0
+31
+!s108 1584960521.000000
+!s107 ../fp_add/fp_add.v|C:\Users\Omar\Documents\DSD\system_template_de1_soc\ip\cordic\cordic.v|
+R3
+!i113 1
+R4
+R5
+Efp_add_0002
+R6
+Z20 DPx3 lpm 14 lpm_components 0 22 BZZBj]8LhndN7CkCjD@L`2
+Z21 DPx12 altera_lnsim 23 altera_lnsim_components 0 22 QZo1Vh6en2ZO3=hNmAfQ>0
+Z22 DPx9 altera_mf 20 altera_mf_components 0 22 gV:l9C^?PSb6]b5V?_jR@3
+R7
+Z23 DPx4 ieee 9 math_real 0 22 Sk6CSihbPL<f[^Shm]=KX0
+R19
+R8
+R9
+R1
+Z24 8C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_add/fp_add/fp_add_0002.vhd
+Z25 FC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_add/fp_add/fp_add_0002.vhd
+l0
+L36
+VoSegcRCJoTLOD?R@4@X[P0
+!s100 13a5NHTjYd@Q^f_U9MgWA0
+R12
+32
+Z26 !s110 1584957844
+!i10b 1
+Z27 !s108 1584957844.000000
+Z28 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_add/fp_add/fp_add_0002.vhd|
+Z29 !s107 C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_add/fp_add/fp_add_0002.vhd|
+!i113 1
+R17
+R18
+Anormal
+R20
+R21
+R22
+R7
+R23
+R19
+R8
+R9
+DEx4 work 11 fp_add_0002 0 22 oSegcRCJoTLOD?R@4@X[P0
+l331
+L46
+V9`JCK8[4KRSH6l7400:X;0
+!s100 B<CB@0g<Eo_cO6_e:PQnS0
+R12
+32
+R26
+!i10b 1
+R27
+R28
+R29
+!i113 1
+R17
+R18
+vfp_mult
+R13
+!i10b 1
+!s100 BmALM9Z3MZ5ZP4YZz:=>:0
+IE5VM1i5IU2nZJXmE0U6@T0
+R0
+R1
+R6
+8C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_mult/fp_mult.v
+FC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_mult/fp_mult.v
+L0 8
+R2
+r1
+!s85 0
+31
+R14
+!s107 C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_mult/fp_mult.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_mult/fp_mult.v|
+!i113 1
+R4
+R5
+Efp_mult_0002
+R6
+R20
+R21
+R22
+R7
+R23
+R19
+R8
+R9
+R1
+Z30 8C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_mult/fp_mult/fp_mult_0002.vhd
+Z31 FC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_mult/fp_mult/fp_mult_0002.vhd
+l0
+L36
+VCF`TlSDD3zz;MmR2BR;Tm3
+!s100 L]JZT9;8^1CMP<kXai_:i1
+R12
+32
+R13
+!i10b 1
+R14
+Z32 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_mult/fp_mult/fp_mult_0002.vhd|
+Z33 !s107 C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/fp_mult/fp_mult/fp_mult_0002.vhd|
+!i113 1
+R17
+R18
+Anormal
+R20
+R21
+R22
+R7
+R23
+R19
+R8
+R9
+DEx4 work 12 fp_mult_0002 0 22 CF`TlSDD3zz;MmR2BR;Tm3
+l191
+L46
+V48@ecLZdP0QHWif`?MW^31
+!s100 ]12l1L_I39_JQ50H0]8WX1
+R12
+32
+R13
+!i10b 1
+R14
+R32
+R33
+!i113 1
+R17
+R18
+vfunc
+!s110 1584984500
+!i10b 1
+!s100 32b`:Sj56l=YJ0oHBX``92
+ICzcOoV>1TR<A8@e4KAYZE3
+R0
+R1
+w1584984439
+8C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/func/func.v
+FC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/func/func.v
+L0 3
+R2
+r1
+!s85 0
+31
+!s108 1584984500.000000
+!s107 C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/func/func.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/func/func.v|
+!i113 1
+R4
+R5
+vfunc_tb
+!s110 1584979454
+!i10b 1
+!s100 6`d_IIPSQe0z3g<gS2^lU1
+If2<J]85S3W5OdY^6G?l2[0
+R0
+R1
+w1584979452
+8C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/func/func_tb.v
+FC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/func/func_tb.v
+L0 3
+R2
+r1
+!s85 0
+31
+!s108 1584979454.000000
+!s107 C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/func/func_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/func/func_tb.v|
+!i113 1
+R4
+R5

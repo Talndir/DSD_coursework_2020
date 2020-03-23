@@ -41,6 +41,14 @@
          type = "int";
       }
    }
+   element ci_func_0
+   {
+      datum _sortIndex
+      {
+         value = "12";
+         type = "int";
+      }
+   }
    element clk_0
    {
       datum _sortIndex
@@ -61,7 +69,7 @@
    {
       datum baseAddress
       {
-         value = "16779264";
+         value = "8390656";
          type = "String";
       }
    }
@@ -114,7 +122,7 @@
    {
       datum baseAddress
       {
-         value = "16781368";
+         value = "8392824";
          type = "String";
       }
    }
@@ -130,7 +138,7 @@
    {
       datum baseAddress
       {
-         value = "16781344";
+         value = "8392800";
          type = "String";
       }
    }
@@ -155,6 +163,22 @@
          type = "String";
       }
    }
+   element performance_counter_0
+   {
+      datum _sortIndex
+      {
+         value = "13";
+         type = "int";
+      }
+   }
+   element performance_counter_0.control_slave
+   {
+      datum baseAddress
+      {
+         value = "8392736";
+         type = "String";
+      }
+   }
    element sdram
    {
       datum _sortIndex
@@ -167,7 +191,7 @@
    {
       datum baseAddress
       {
-         value = "8388608";
+         value = "0";
          type = "String";
       }
    }
@@ -183,7 +207,7 @@
    {
       datum baseAddress
       {
-         value = "16781312";
+         value = "8392768";
          type = "String";
       }
    }
@@ -199,7 +223,7 @@
    {
       datum baseAddress
       {
-         value = "16781360";
+         value = "8392816";
          type = "String";
       }
    }
@@ -233,9 +257,10 @@
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
  <interface name="sdram_wire" internal="sdram.wire" type="conduit" dir="end" />
  <module name="ci_cos_0" kind="ci_cos" version="1.0" enabled="0" />
- <module name="ci_expr_0" kind="ci_expr" version="1.0" enabled="1" />
- <module name="ci_fp_add_0" kind="ci_fp_add" version="1.0" enabled="1" />
+ <module name="ci_expr_0" kind="ci_expr" version="1.0" enabled="0" />
+ <module name="ci_fp_add_0" kind="ci_fp_add" version="1.0" enabled="0" />
  <module name="ci_fp_mult_0" kind="ci_fp_mult" version="1.0" enabled="0" />
+ <module name="ci_func_0" kind="ci_func" version="1.0" enabled="1" />
  <module name="clk_0" kind="clock_source" version="18.1" enabled="1">
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="clockFrequencyKnown" value="true" />
@@ -250,9 +275,9 @@
   <parameter name="cpuID" value="0" />
   <parameter name="cpuID_stored" value="0" />
   <parameter name="cpuReset" value="false" />
-  <parameter name="customInstSlavesSystemInfo"><![CDATA[<info><slave name="ci_fp_add_0" baseAddress="0" addressSpan="1" clockCycleType="MULTICYCLE" /><slave name="ci_expr_0" baseAddress="3" addressSpan="1" clockCycleType="MULTICYCLE" /></info>]]></parameter>
-  <parameter name="dataAddrWidth" value="25" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='sdram.s1' start='0x800000' end='0x1000000' /><slave name='cpu.jtag_debug_module' start='0x1000800' end='0x1001000' /><slave name='sys_clk_timer.s1' start='0x1001000' end='0x1001020' /><slave name='led_pio.s1' start='0x1001020' end='0x1001030' /><slave name='sysid.control_slave' start='0x1001030' end='0x1001038' /><slave name='jtag_uart.avalon_jtag_slave' start='0x1001038' end='0x1001040' /></address-map>]]></parameter>
+  <parameter name="customInstSlavesSystemInfo"><![CDATA[<info><slave name="ci_func_0" baseAddress="1" addressSpan="1" clockCycleType="VARIABLE" /></info>]]></parameter>
+  <parameter name="dataAddrWidth" value="24" />
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='sdram.s1' start='0x0' end='0x800000' /><slave name='cpu.jtag_debug_module' start='0x800800' end='0x801000' /><slave name='performance_counter_0.control_slave' start='0x801020' end='0x801040' /><slave name='sys_clk_timer.s1' start='0x801040' end='0x801060' /><slave name='led_pio.s1' start='0x801060' end='0x801070' /><slave name='sysid.control_slave' start='0x801070' end='0x801078' /><slave name='jtag_uart.avalon_jtag_slave' start='0x801078' end='0x801080' /></address-map>]]></parameter>
   <parameter name="dcache_bursts" value="false" />
   <parameter name="dcache_lineSize" value="32" />
   <parameter name="dcache_numTCDM" value="0" />
@@ -278,8 +303,8 @@
   <parameter name="icache_size" value="2048" />
   <parameter name="icache_tagramBlockType" value="Automatic" />
   <parameter name="impl" value="Small" />
-  <parameter name="instAddrWidth" value="25" />
-  <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='sdram.s1' start='0x800000' end='0x1000000' /><slave name='cpu.jtag_debug_module' start='0x1000800' end='0x1001000' /></address-map>]]></parameter>
+  <parameter name="instAddrWidth" value="24" />
+  <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='sdram.s1' start='0x0' end='0x800000' /><slave name='cpu.jtag_debug_module' start='0x800800' end='0x801000' /><slave name='performance_counter_0.control_slave' start='0x801020' end='0x801040' /></address-map>]]></parameter>
   <parameter name="internalIrqMaskSystemInfo" value="65538" />
   <parameter name="manuallyAssignCpuID" value="true" />
   <parameter name="mmu_TLBMissExcOffset" value="0" />
@@ -435,6 +460,13 @@
   <parameter name="writable" value="true" />
  </module>
  <module
+   name="performance_counter_0"
+   kind="altera_avalon_performance_counter"
+   version="18.1"
+   enabled="1">
+  <parameter name="numberOfSections" value="1" />
+ </module>
+ <module
    name="sdram"
    kind="altera_avalon_new_sdram_controller"
    version="18.1"
@@ -492,7 +524,7 @@
    start="cpu.data_master"
    end="jtag_uart.avalon_jtag_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01001038" />
+  <parameter name="baseAddress" value="0x00801078" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -501,7 +533,16 @@
    start="cpu.data_master"
    end="sysid.control_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01001030" />
+  <parameter name="baseAddress" value="0x00801070" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="cpu.data_master"
+   end="performance_counter_0.control_slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00801020" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -510,7 +551,7 @@
    start="cpu.data_master"
    end="cpu.jtag_debug_module">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01000800" />
+  <parameter name="baseAddress" value="0x00800800" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -528,17 +569,35 @@
    start="cpu.data_master"
    end="sys_clk_timer.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01001000" />
+  <parameter name="baseAddress" value="0x00801040" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection kind="avalon" version="18.1" start="cpu.data_master" end="led_pio.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01001020" />
+  <parameter name="baseAddress" value="0x00801060" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection kind="avalon" version="18.1" start="cpu.data_master" end="sdram.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00800000" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="ci_func_0.func_avalon_master"
+   end="sdram.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="cpu.instruction_master"
+   end="performance_counter_0.control_slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00801020" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -547,7 +606,7 @@
    start="cpu.instruction_master"
    end="cpu.jtag_debug_module">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x01000800" />
+  <parameter name="baseAddress" value="0x00800800" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -565,7 +624,7 @@
    start="cpu.instruction_master"
    end="sdram.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00800000" />
+  <parameter name="baseAddress" value="0x0000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection kind="clock" version="18.1" start="clk_0.clk" end="cpu.clk" />
@@ -574,7 +633,13 @@
  <connection kind="clock" version="18.1" start="clk_0.clk" end="sysid.clk" />
  <connection kind="clock" version="18.1" start="clk_0.clk" end="led_pio.clk" />
  <connection kind="clock" version="18.1" start="clk_0.clk" end="sdram.clk" />
+ <connection
+   kind="clock"
+   version="18.1"
+   start="clk_0.clk"
+   end="performance_counter_0.clk" />
  <connection kind="clock" version="18.1" start="clk_0.clk" end="onchip_mem.clk1" />
+ <connection kind="clock" version="18.1" start="clk_0.clk" end="ci_func_0.clock" />
  <connection kind="interrupt" version="18.1" start="cpu.d_irq" end="jtag_uart.irq">
   <parameter name="irqNumber" value="16" />
  </connection>
@@ -622,6 +687,15 @@
   <parameter name="baseAddress" value="1" />
  </connection>
  <connection
+   kind="nios_custom_instruction"
+   version="18.1"
+   start="cpu.custom_instruction_master"
+   end="ci_func_0.ncs_cis0">
+  <parameter name="CIName" value="ci_func_0" />
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="1" />
+ </connection>
+ <connection
    kind="reset"
    version="18.1"
    start="clk_0.clk_reset"
@@ -638,6 +712,16 @@
    start="clk_0.clk_reset"
    end="led_pio.reset" />
  <connection kind="reset" version="18.1" start="clk_0.clk_reset" end="sdram.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
+   end="ci_func_0.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
+   end="performance_counter_0.reset" />
  <connection
    kind="reset"
    version="18.1"

@@ -8,11 +8,11 @@
 #include <unistd.h>
 #include <math.h>
 #include <tgmath.h>
+#include <altera_avalon_performance_counter.h>
 
-#define FP_ADD(A,B) __builtin_custom_fnff(0x0,(A),(B))
-#define FP_MULT(A,B) __builtin_custom_fnff(0x1,(A),(B))
-#define COS(A) __builtin_custom_fnf(0x2,(A))
-#define EXPR(A) __builtin_custom_fnf(0x3,(A))
+#define FUNC(A,B) __builtin_custom_fnpi(0x1,(A),(B))
+#define TIMER() __builtin_custom_in(0x0)
+#define PERFORMANCE_COUNTER_0_BASE 0x801020
 
 #define TEST 3
 
@@ -49,19 +49,15 @@ void generateVector(float *x, int start, int length)
 
 float sumVector(float *x, int length)
 {
-	float sum = 0.f;
-	float c;
-	for (unsigned int i = 0; i < length; ++i)
-		sum = FP_ADD(sum, EXPR(x[i]));
-
-	return sum;
+	PERF_BEGIN(PERFORMANCE_COUNTER_0_BASE, 1);
+	float y = FUNC(x, length);
+	PERF_END(PERFORMANCE_COUNTER_0_BASE, 1);
+	return y;
 }
 
-long unsigned runOnce()
+long unsigned runOnce(float *x)
 {
-	float x[N];
 	clock_t exec_t1, exec_t2;
-	generateVector(x, 0, N);
 	exec_t1 = times(NULL); 	// Get time before starting
 	float y = sumVector(x, N);
 	exec_t2 = times(NULL); 	// Get time after finishing
@@ -74,17 +70,30 @@ long unsigned runOnce()
 
 int main()
 {
-	printf("Task 7!\n");
+	PERF_RESET(PERFORMANCE_COUNTER_0_BASE);
+
+	printf("Task 8!\n");
 	printf("Test %u\n", TEST);
 #ifdef LOOKUP
 	initLookup();
 #endif
+	float x[N];
+	generateVector(x, 0, N);
+
 	// Run 10 times
+	PERF_START_MEASURING(PERFORMANCE_COUNTER_0_BASE);
 	long unsigned sum = 0;
 	for (unsigned int i = 0; i < 5; ++i)
-		sum += runOnce();
+		sum += runOnce(x);
 	sum /= 5;
 	printf("Average time: %lums\n", sum);
+	PERF_STOP_MEASURING(PERFORMANCE_COUNTER_0_BASE);
+
+	perf_print_formatted_report(
+			(void *)PERFORMANCE_COUNTER_0_BASE,
+			alt_get_cpu_freq(),
+			1,
+			" FUNC");
 
 	return 0;
 }

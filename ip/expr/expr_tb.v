@@ -20,6 +20,7 @@ initial
 begin
 	$display($time, " << Starting Simulation >> ");
 	clk = 0;
+	reset = 0;
 	x = 32'h3f000000;
 	#20000;
 	$display($time, " << Simulation Complete>> ");

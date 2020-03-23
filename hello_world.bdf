@@ -322,7 +322,7 @@ refer to the applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 600 120 1112 472)
+	(rect 592 120 1104 472)
 	(text "first_nios2_system" (rect 200 -1 328 15)(font "Arial" (font_size 10)))
 	(text "inst" (rect 8 336 25 348)(font "Arial" ))
 	(port
@@ -446,55 +446,6 @@ refer to the applicable agreement for further details.
 	)
 )
 (connector
-	(pt 488 272)
-	(pt 600 272)
-)
-(connector
-	(pt 536 232)
-	(pt 600 232)
-	(bus)
-)
-(connector
-	(pt 536 312)
-	(pt 600 312)
-	(bus)
-)
-(connector
-	(pt 536 328)
-	(pt 600 328)
-	(bus)
-)
-(connector
-	(pt 536 344)
-	(pt 600 344)
-)
-(connector
-	(pt 536 360)
-	(pt 600 360)
-)
-(connector
-	(pt 536 376)
-	(pt 600 376)
-)
-(connector
-	(pt 536 408)
-	(pt 600 408)
-	(bus)
-)
-(connector
-	(pt 536 424)
-	(pt 600 424)
-)
-(connector
-	(pt 536 440)
-	(pt 600 440)
-)
-(connector
-	(pt 536 392)
-	(pt 600 392)
-	(bus)
-)
-(connector
 	(pt 320 72)
 	(pt 344 72)
 )
@@ -515,11 +466,60 @@ refer to the applicable agreement for further details.
 	(pt 560 72)
 )
 (connector
-	(pt 600 192)
-	(pt 560 192)
+	(pt 536 232)
+	(pt 592 232)
+	(bus)
+)
+(connector
+	(pt 488 272)
+	(pt 592 272)
+)
+(connector
+	(pt 536 312)
+	(pt 592 312)
+	(bus)
+)
+(connector
+	(pt 536 328)
+	(pt 592 328)
+	(bus)
+)
+(connector
+	(pt 536 344)
+	(pt 592 344)
+)
+(connector
+	(pt 536 360)
+	(pt 592 360)
+)
+(connector
+	(pt 536 376)
+	(pt 592 376)
+)
+(connector
+	(pt 536 392)
+	(pt 592 392)
+	(bus)
+)
+(connector
+	(pt 536 408)
+	(pt 592 408)
+	(bus)
+)
+(connector
+	(pt 536 424)
+	(pt 592 424)
+)
+(connector
+	(pt 536 440)
+	(pt 592 440)
 )
 (connector
 	(pt 560 192)
+	(pt 592 192)
+)
+(connector
 	(pt 560 72)
+	(pt 560 192)
 )
 (junction (pt 344 72))

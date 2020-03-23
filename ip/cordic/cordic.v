@@ -1,6 +1,6 @@
 `timescale 1 ps / 1 ps
 
-`include "../fp_add/fp_add.v"
+//`include "../fp_add/fp_add.v"
 
 /*
 	Takes 3N + 2 cycles per instruction.
@@ -54,7 +54,7 @@ module cordic (
 
 		fp_add add_x (
 			.clk(clk),
-			.areset(32'b0),
+			.areset(reset),
 			.a(x[i]),
 			.b(xb),
 			.q(xout)
@@ -62,7 +62,7 @@ module cordic (
 
 		fp_add add_y (
 			.clk(clk),
-			.areset(32'b0),
+			.areset(reset),
 			.a(y[i]),
 			.b(yb),
 			.q(yout)
@@ -70,7 +70,7 @@ module cordic (
 
 		fp_add add_z (
 			.clk(clk),
-			.areset(32'b0),
+			.areset(reset),
 			.a(z[i]),
 			.b(zb),
 			.q(zout)

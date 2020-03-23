@@ -105,8 +105,9 @@ set_location_assignment PIN_AK12 -to oDRAM_DQM[1]
 set_location_assignment PIN_AB13 -to oDRAM_DQM[0]
 
 set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
-set_global_assignment -name VERILOG_FILE ip/expr/expr.v
-set_global_assignment -name VERILOG_FILE ip/cordic/cordic.v
+set_global_assignment -name VERILOG_FILE ip/func/func.v -library func
+set_global_assignment -name VERILOG_FILE ip/expr/expr.v -library expr
+set_global_assignment -name VERILOG_FILE ip/cordic/cordic.v -library cordic
 set_global_assignment -name QSYS_FILE first_nios2_system.qsys
 set_global_assignment -name SDC_FILE hw_dev_tutorial.sdc
 set_global_assignment -name BDF_FILE hello_world.bdf
