@@ -11,7 +11,6 @@
 #include <altera_avalon_performance_counter.h>
 
 #define FUNC(A,B) __builtin_custom_fnpi(0x1,(A),(B))
-#define TIMER() __builtin_custom_in(0x0)
 #define PERFORMANCE_COUNTER_0_BASE 0x801020
 
 #define TEST 3

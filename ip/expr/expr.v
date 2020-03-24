@@ -1,12 +1,8 @@
 `timescale 1 ps / 1 ps
 
-//`include "../fp_add/fp_add.v"
-//`include "../fp_mult/fp_mult.v"
-//`include "../cordic/cordic.v"
-
 /*
-	Takes 56 cycles per instruction.
-	Not pipelined.
+	Latency of 3N + 10 cycles per instruction.
+	Fully pipelined at 1 instruction per cycle.
 */
 
 module expr (
@@ -15,6 +11,16 @@ module expr (
 	input	wire	[31:0]	x,
 	output	reg	[31:0]	result
 	);
+
+	reg [31:0] xs [36:1];
+	genvar i;
+	generate
+	for (i = 1; i < 36; i = i + 1) begin : loop
+		always @ (posedge clk) begin
+			xs[i+1] <= xs[i];
+		end
+	end
+	endgenerate
 
 	wire [31:0] add1_a = {x[31], x[30:23] - 8'h07, x[22:0]};
 	wire [31:0] add1_to_cos, cos_to_mult1, mult1_to_add2, add2_to_mult2, mult2_q;
@@ -37,7 +43,7 @@ module expr (
 	fp_mult mult1 (
 		.clk(clk),
 		.areset(reset),
-		.a(x),
+		.a(xs[32]),
 		.b(cos_to_mult1),
 		.q(mult1_to_add2)
 	);
@@ -53,12 +59,13 @@ module expr (
 	fp_mult mult2 (
 		.clk(clk),
 		.areset(reset),
-		.a(x),
+		.a(xs[36]),
 		.b(add2_to_mult2),
 		.q(mult2_q)
 	);
 
 	always @ (posedge clk) begin
+		xs[1] <= x;
 		result <= mult2_q;
 	end
 

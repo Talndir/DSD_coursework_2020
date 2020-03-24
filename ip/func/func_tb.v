@@ -64,7 +64,7 @@ begin
 	#200
 	readdata = 0;
 	waitrequest = 1;
-	#10000
+	#1000
 	waitrequest = 0;
 	readdata = 16'h0000;
 	#200

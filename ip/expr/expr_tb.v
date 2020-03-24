@@ -22,7 +22,9 @@ begin
 	clk = 0;
 	reset = 0;
 	x = 32'h3f000000;
-	#20000;
+	#200;
+	x = 32'h3f800000;
+	#10000;
 	$display($time, " << Simulation Complete>> ");
 	$display($time, " << Simulation Complete>> ");
 
