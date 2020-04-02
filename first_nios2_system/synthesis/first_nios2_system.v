@@ -86,6 +86,7 @@ module first_nios2_system (
 	wire  [15:0] ci_func_0_func_avalon_master_readdata;                                  // mm_interconnect_0:ci_func_0_func_avalon_master_readdata -> ci_func_0:readdata
 	wire  [31:0] ci_func_0_func_avalon_master_address;                                   // ci_func_0:address -> mm_interconnect_0:ci_func_0_func_avalon_master_address
 	wire         ci_func_0_func_avalon_master_read;                                      // ci_func_0:read -> mm_interconnect_0:ci_func_0_func_avalon_master_read
+	wire         ci_func_0_func_avalon_master_readdatavalid;                             // mm_interconnect_0:ci_func_0_func_avalon_master_readdatavalid -> ci_func_0:readdatavalid
 	wire  [31:0] cpu_instruction_master_readdata;                                        // mm_interconnect_0:cpu_instruction_master_readdata -> cpu:i_readdata
 	wire         cpu_instruction_master_waitrequest;                                     // mm_interconnect_0:cpu_instruction_master_waitrequest -> cpu:i_waitrequest
 	wire  [23:0] cpu_instruction_master_address;                                         // cpu:i_address -> mm_interconnect_0:cpu_instruction_master_address
@@ -139,18 +140,19 @@ module first_nios2_system (
 	wire         rst_controller_reset_out_reset_req;                                     // rst_controller:reset_req -> [cpu:reset_req, rst_translator:reset_req_in]
 
 	func ci_func_0 (
-		.clk         (clk_clk),                                                                //              clock.clk
-		.reset       (rst_controller_reset_out_reset),                                         //              reset.reset
-		.base_ptr    (cpu_custom_instruction_master_multi_slave_translator0_ci_master_dataa),  //           ncs_cis0.dataa
-		.result      (cpu_custom_instruction_master_multi_slave_translator0_ci_master_result), //                   .result
-		.clk2        (cpu_custom_instruction_master_multi_slave_translator0_ci_master_clk),    //                   .clk
-		.start       (cpu_custom_instruction_master_multi_slave_translator0_ci_master_start),  //                   .start
-		.done        (cpu_custom_instruction_master_multi_slave_translator0_ci_master_done),   //                   .done
-		.size        (cpu_custom_instruction_master_multi_slave_translator0_ci_master_datab),  //                   .datab
-		.address     (ci_func_0_func_avalon_master_address),                                   // func_avalon_master.address
-		.read        (ci_func_0_func_avalon_master_read),                                      //                   .read
-		.waitrequest (ci_func_0_func_avalon_master_waitrequest),                               //                   .waitrequest
-		.readdata    (ci_func_0_func_avalon_master_readdata)                                   //                   .readdata
+		.clk           (clk_clk),                                                                //              clock.clk
+		.reset         (rst_controller_reset_out_reset),                                         //              reset.reset
+		.base_ptr      (cpu_custom_instruction_master_multi_slave_translator0_ci_master_dataa),  //           ncs_cis0.dataa
+		.result        (cpu_custom_instruction_master_multi_slave_translator0_ci_master_result), //                   .result
+		.clk2          (cpu_custom_instruction_master_multi_slave_translator0_ci_master_clk),    //                   .clk
+		.start         (cpu_custom_instruction_master_multi_slave_translator0_ci_master_start),  //                   .start
+		.done          (cpu_custom_instruction_master_multi_slave_translator0_ci_master_done),   //                   .done
+		.size          (cpu_custom_instruction_master_multi_slave_translator0_ci_master_datab),  //                   .datab
+		.address       (ci_func_0_func_avalon_master_address),                                   // func_avalon_master.address
+		.read          (ci_func_0_func_avalon_master_read),                                      //                   .read
+		.waitrequest   (ci_func_0_func_avalon_master_waitrequest),                               //                   .waitrequest
+		.readdata      (ci_func_0_func_avalon_master_readdata),                                  //                   .readdata
+		.readdatavalid (ci_func_0_func_avalon_master_readdatavalid)                              //                   .readdatavalid
 	);
 
 	first_nios2_system_cpu cpu (
@@ -423,6 +425,7 @@ module first_nios2_system (
 		.ci_func_0_func_avalon_master_waitrequest          (ci_func_0_func_avalon_master_waitrequest),                            //                                    .waitrequest
 		.ci_func_0_func_avalon_master_read                 (ci_func_0_func_avalon_master_read),                                   //                                    .read
 		.ci_func_0_func_avalon_master_readdata             (ci_func_0_func_avalon_master_readdata),                               //                                    .readdata
+		.ci_func_0_func_avalon_master_readdatavalid        (ci_func_0_func_avalon_master_readdatavalid),                          //                                    .readdatavalid
 		.cpu_data_master_address                           (cpu_data_master_address),                                             //                     cpu_data_master.address
 		.cpu_data_master_waitrequest                       (cpu_data_master_waitrequest),                                         //                                    .waitrequest
 		.cpu_data_master_byteenable                        (cpu_data_master_byteenable),                                          //                                    .byteenable

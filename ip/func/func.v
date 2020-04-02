@@ -14,23 +14,28 @@ module func (
 	output	reg		[31:0]	address,
 	output	reg				read,
 	input	wire	[15:0]	readdata,
-	input	wire			waitrequest
+	input	wire			waitrequest,
+	input	wire			readdatavalid
 	);
 	
-	reg 	[3:0]	state;
+	reg 	[3:0]	state_req;
+	reg		[3:0]	state_fetch;
 
-	localparam STATE_IDLE	 	= 0;
-	localparam STATE_FETCH_1 	= 2;
-	localparam STATE_FETCH_2	= 3;
-	localparam STATE_WAIT		= 5;
-	localparam STATE_DONE		= 7;
+	localparam STATE_REQ_IDLE 	= 0;
+	localparam STATE_REQ_1		= 1;
+	localparam STATE_REQ_2		= 2;
+	localparam STATE_REQ_WAIT	= 3;
+	localparam STATE_REQ_END	= 5;
+	localparam STATE_REQ_DONE	= 6;
+	
+	localparam STATE_FETCH_1 	= 0;
+	localparam STATE_FETCH_2	= 1;
 
 	reg		[31:0]	ptr;
 	reg		[31:0]	end_ptr;
 	
-	reg 	[7:0] 	counter;
-	
 	reg 	[31:0]	val;
+	
 	wire 	[31:0] 	expr_input;
 	wire 	[31:0] 	expr_output;
 	
@@ -59,7 +64,8 @@ module func (
 	reg		[45:0]	valid;
 	
 	initial begin
-		state = STATE_IDLE;
+		state_req = STATE_REQ_IDLE;
+		state_fetch = STATE_FETCH_1;
 		done = 0;
 		address = 0;
 		read = 0;
@@ -70,57 +76,82 @@ module func (
 		valid[45:1] <= valid[44:0];
 		valid[0] <= 0;
 	
-		case (state)
-			STATE_IDLE: begin
+		case (state_req)
+			STATE_REQ_IDLE: begin
 				if (start) begin
 					ptr <= base_ptr + 2;
-					end_ptr <= base_ptr + (size << 2);
-					result <= 0;
 					address <= base_ptr;
 					read <= 1;
-					state <= STATE_FETCH_1;
-				end
-			end
-		
-			STATE_FETCH_1: begin
-				if (~waitrequest) begin
-					val[15:0] <= readdata;
-					address <= ptr;
-					ptr <= ptr + 2;
-					state <= STATE_FETCH_2;
+					end_ptr <= base_ptr + (size << 2);
+					result <= 0;
+					state_req <= STATE_REQ_1;
+					state_fetch <= STATE_FETCH_1;
 				end
 			end
 			
-			STATE_FETCH_2: begin
+			STATE_REQ_1: begin
 				if (~waitrequest) begin
-					val[31:16] <= readdata;
-					valid[0] <= 1;
+					address <= ptr;
+					ptr <= ptr + 2;
+					state_req <= STATE_REQ_2;
+				end
+			end
+			
+			STATE_REQ_2: begin
+				if (~waitrequest) begin
+					read <= 0;
+					state_req <= STATE_REQ_WAIT;
+				end
+			end
+
+			STATE_REQ_WAIT: begin
+				if (valid[0]) begin
 					if (ptr == end_ptr) begin
-						read <= 0;
-						state <= STATE_WAIT;
+						state_req <= STATE_REQ_END;
 					end else begin
 						address <= ptr;
 						ptr <= ptr + 2;
-						state <= STATE_FETCH_1;
+						read <= 1;
+						state_req <= STATE_REQ_1;
 					end
 				end
 			end
 			
-			STATE_WAIT: begin
+			STATE_REQ_END: begin
 				if (!valid[44:0]) begin
 					done <= 1;
-					state <= STATE_DONE;
+					state_req <= STATE_REQ_DONE;
+					state_fetch <= STATE_FETCH_1;
 				end
 			end
-
-			STATE_DONE: begin
+			
+			STATE_REQ_DONE: begin
 				done <= 0;
-				state <= STATE_IDLE;
+				state_req <= STATE_REQ_IDLE;
 			end
-
+			
 			default: begin end
 		endcase
 		
+		case (state_fetch)
+			STATE_FETCH_1: begin
+				if (readdatavalid) begin
+					val[15:0] <= readdata;
+					state_fetch <= STATE_FETCH_2;
+				end
+			end
+			
+			STATE_FETCH_2: begin
+				if (readdatavalid) begin
+					val[31:16] <= readdata;
+					valid[0] <= 1;
+					state_fetch <= STATE_FETCH_1;
+				end
+			end
+			
+			default: begin end
+		endcase
+	
 		if (valid[45]) begin
 			result <= add_q;
 		end

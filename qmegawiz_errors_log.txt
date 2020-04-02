@@ -1,0 +1,6 @@
+
+
+C:/Users/Omar/Documents/DSD/system_template_de1_soc/pll.v
+
+Mar 27 08AM:58:53>: Megafunction PLL Intel FPGA IP v18.1 is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted

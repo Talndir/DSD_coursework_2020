@@ -13,6 +13,7 @@ module first_nios2_system_mm_interconnect_0 (
 		output wire        ci_func_0_func_avalon_master_waitrequest,          //                                    .waitrequest
 		input  wire        ci_func_0_func_avalon_master_read,                 //                                    .read
 		output wire [15:0] ci_func_0_func_avalon_master_readdata,             //                                    .readdata
+		output wire        ci_func_0_func_avalon_master_readdatavalid,        //                                    .readdatavalid
 		input  wire [23:0] cpu_data_master_address,                           //                     cpu_data_master.address
 		output wire        cpu_data_master_waitrequest,                       //                                    .waitrequest
 		input  wire [3:0]  cpu_data_master_byteenable,                        //                                    .byteenable
@@ -719,7 +720,7 @@ module first_nios2_system_mm_interconnect_0 (
 		.USE_BEGINTRANSFER           (0),
 		.USE_CHIPSELECT              (0),
 		.USE_BURSTCOUNT              (0),
-		.USE_READDATAVALID           (0),
+		.USE_READDATAVALID           (1),
 		.USE_WAITREQUEST             (1),
 		.USE_READRESPONSE            (0),
 		.USE_WRITERESPONSE           (0),
@@ -748,12 +749,12 @@ module first_nios2_system_mm_interconnect_0 (
 		.av_waitrequest         (ci_func_0_func_avalon_master_waitrequest),                                        //                          .waitrequest
 		.av_read                (ci_func_0_func_avalon_master_read),                                               //                          .read
 		.av_readdata            (ci_func_0_func_avalon_master_readdata),                                           //                          .readdata
+		.av_readdatavalid       (ci_func_0_func_avalon_master_readdatavalid),                                      //                          .readdatavalid
 		.av_burstcount          (1'b1),                                                                            //               (terminated)
 		.av_byteenable          (2'b11),                                                                           //               (terminated)
 		.av_beginbursttransfer  (1'b0),                                                                            //               (terminated)
 		.av_begintransfer       (1'b0),                                                                            //               (terminated)
 		.av_chipselect          (1'b0),                                                                            //               (terminated)
-		.av_readdatavalid       (),                                                                                //               (terminated)
 		.av_write               (1'b0),                                                                            //               (terminated)
 		.av_writedata           (16'b0000000000000000),                                                            //               (terminated)
 		.av_lock                (1'b0),                                                                            //               (terminated)

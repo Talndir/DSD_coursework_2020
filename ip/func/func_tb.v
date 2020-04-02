@@ -16,6 +16,7 @@ wire	[31:0]	address;
 wire			read;
 reg		[15:0]	readdata;
 reg				waitrequest;
+reg				readdatavalid;
 
 func fn (
 	.clk(clk),
@@ -31,7 +32,8 @@ func fn (
 	.address(address),
 	.read(read),
 	.readdata(readdata),
-	.waitrequest(waitrequest)
+	.waitrequest(waitrequest),
+	.readdatavalid(readdatavalid)
 );
 
 always #100 clk = ~clk;
@@ -50,7 +52,7 @@ begin
 	#200;
 	start = 1;
 	base_ptr = 32'h12345678;
-	size = 2;
+	size = 1;
 	#200;
 	start = 0;
 	base_ptr = 0;
@@ -58,17 +60,21 @@ begin
 	waitrequest = 1;
 	#600;
 	waitrequest = 0;
-	readdata = 16'h0000;
-	#200;
-	readdata = 16'h3f00;
 	#200
-	readdata = 0;
 	waitrequest = 1;
-	#1000
+	#400
 	waitrequest = 0;
 	readdata = 16'h0000;
+	readdatavalid = 1;
 	#200
-	readdata = 16'h3f80;
+	readdatavalid = 0;
+	#600;
+	readdata = 16'h3f00;
+	readdatavalid = 1;
+	#200
+	readdata = 0;
+	readdatavalid = 0;
+	waitrequest = 1;
 	#10000
 	$display($time, " << Simulation Complete>> ");
 	$display($time, " << Simulation Complete>> ");
