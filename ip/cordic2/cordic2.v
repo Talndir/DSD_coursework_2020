@@ -9,7 +9,7 @@ module cordic2 (
 	
 	localparam N = 19;
 	
-	wire	[31:0]	ARCTAN_TABLE	[19:0];
+	wire signed [31:0] ARCTAN_TABLE [19:0];
 	
 	assign  ARCTAN_TABLE[0]  = 32'h6487ed80;
     assign  ARCTAN_TABLE[1]  = 32'h3b58ce00;
@@ -32,13 +32,13 @@ module cordic2 (
     assign  ARCTAN_TABLE[18] = 32'h00002000;
     assign  ARCTAN_TABLE[19] = 32'h00001000;
 	
-	wire	[31:0]	K_RECIP;
+	wire signed [31:0] K_RECIP;
 	
 	assign 	K_RECIP	= 32'h4dba7700;
 	
-	reg	[31:0]	x	[N:0];
-	reg	[31:0]	y	[N:0];
-	reg	[31:0]	z	[N:0];
+	reg	signed [31:0]	x	[N:0];
+	reg	signed [31:0]	y	[N:0];
+	reg	signed [31:0]	z	[N:0];
 
 	wire [31:0] fp2i_out, i2fp_out;
 
@@ -52,6 +52,12 @@ module cordic2 (
 		.y(i2fp_out)
 	);
 
+	initial begin
+		x[0] <= K_RECIP;
+		y[0] <= 0;
+		z[0] <= 0;
+	end
+
 	always @ (posedge clk) begin
 		x[0] <= K_RECIP;
 		y[0] <= 0;
@@ -63,8 +69,8 @@ module cordic2 (
 	generate
 	for (i = 0; i < N; i = i + 1) begin : cordic2_loop
 		always @ (posedge clk) begin
-			x[i+1] <= z[i][31] ? x[i] + (y[i] >> i) : x[i] - (y[i] >> i);
-			y[i+1] <= z[i][31] ? y[i] - (x[i] >> i) : y[i] + (x[i] >> i);
+			x[i+1] <= z[i][31] ? x[i] + (y[i] >>> i) : x[i] - (y[i] >>> i);
+			y[i+1] <= z[i][31] ? y[i] - (x[i] >>> i) : y[i] + (x[i] >>> i);
 			z[i+1] <= z[i][31] ? z[i] + ARCTAN_TABLE[i] : z[i] - ARCTAN_TABLE[i];
 		end
 	end
