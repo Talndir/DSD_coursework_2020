@@ -1,0 +1,115 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/func
+vclz
+Z0 !s110 1585911585
+!i10b 1
+!s100 c^:FUl??ezaS>4h:l;<JM3
+ID0INAT^DmbAlGd8m2gTjY3
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 dC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/cordic2
+w1585910080
+8C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/clz.v
+FC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/clz.v
+L0 3
+Z3 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z4 !s108 1585911585.000000
+!s107 C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/clz.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/clz.v|
+!i113 1
+Z5 o-work work
+Z6 tCvgOpt 0
+vcordic2
+!s110 1585913027
+!i10b 1
+!s100 [n0D0J`Z:FCJC^808XfBR2
+IR=;zXVR5UE:3BgnPDGB<[2
+R1
+R2
+w1585913023
+8C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/cordic2/cordic2.v
+FC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/cordic2/cordic2.v
+L0 3
+R3
+r1
+!s85 0
+31
+!s108 1585913026.000000
+!s107 C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/cordic2/cordic2.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/cordic2/cordic2.v|
+!i113 1
+R5
+R6
+vcordic2_tb
+!s110 1585911793
+!i10b 1
+!s100 1fS@J3P_F76H<K2E;mSiE1
+IGAj;4bIYQl9>[>5cfF[Sf2
+R1
+R2
+w1585911786
+8C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/cordic2/cordic2_tb.v
+FC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/cordic2/cordic2_tb.v
+L0 3
+R3
+r1
+!s85 0
+31
+!s108 1585911793.000000
+!s107 C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/cordic2/cordic2_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/cordic2/cordic2_tb.v|
+!i113 1
+R5
+R6
+vfp_to_int
+R0
+!i10b 1
+!s100 1Kn0Z66;_[n^DaD]DR5`o2
+IK7AU<ehc<V;MB`>IQbz`j1
+R1
+R2
+w1585911262
+8C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/fp_to_int.v
+FC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/fp_to_int.v
+L0 3
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/fp_to_int.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/fp_to_int.v|
+!i113 1
+R5
+R6
+vint_to_fp
+!s110 1585913009
+!i10b 1
+!s100 M]mIN<TAaGE<AJh9cEZUN0
+I0VNK=AoEZ@ICj0N<EDn>L2
+R1
+R2
+w1585912897
+8C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/int_to_fp.v
+FC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/int_to_fp.v
+L0 3
+R3
+r1
+!s85 0
+31
+!s108 1585913009.000000
+!s107 C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/int_to_fp.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/int_to_fp.v|
+!i113 1
+R5
+R6

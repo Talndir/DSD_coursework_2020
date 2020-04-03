@@ -47,6 +47,13 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	fp_mult
 
+} {} {}} C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/func/func.v {1 {vlog -work work -stats=none C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/func/func.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module func
+
+Top level modules:
+	func
+
 } {} {}} C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/cordic/cordic.v {1 {vlog -work work -stats=none {C:\Users\Omar\Documents\DSD\system_template_de1_soc\ip\cordic\cordic.v}
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling module cordic
