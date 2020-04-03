@@ -20,8 +20,8 @@ initial
 begin
 	$display($time, " << Starting Simulation >> ");
 	clk = 1;
-	#300;
-	theta = 32'h3f000000;
+	#100;
+	theta = 32'hbf7f0000;
 	#10100;
 	$display($time, " << Simulation Complete>> ");
 	$display($time, " << Simulation Complete>> ");

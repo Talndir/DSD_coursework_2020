@@ -19,8 +19,9 @@ always #100 clk = ~clk;
 initial
 begin
 	$display($time, " << Starting Simulation >> ");
-	clk = 0;
+	clk = 1;
 	reset = 0;
+	#100
 	x = 32'h3f000000;
 	#200;
 	x = 32'h3f800000;

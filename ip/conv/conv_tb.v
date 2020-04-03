@@ -41,6 +41,8 @@ begin
 	int_to_fp_x = 32'd1073741824;	// Should be 0.5
 	#100
 	int_to_fp_x = 32'd1884595247;	// Should be 0.87758256189
+	#100
+	fp_to_int_x = 32'hbf7f0000;
 	#200
 	$display($time, " << Simulation Complete>> ");
 

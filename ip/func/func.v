@@ -61,7 +61,7 @@ module func (
 		.q(add_q)
 	);
 	
-	reg		[45:0]	valid;
+	reg		[36:0]	valid;
 	
 	initial begin
 		state_req = STATE_REQ_IDLE;
@@ -73,7 +73,7 @@ module func (
 	end
 
 	always @ (posedge clk) begin
-		valid[45:1] <= valid[44:0];
+		valid[36:1] <= valid[35:0];
 		valid[0] <= 0;
 	
 		case (state_req)
@@ -118,7 +118,7 @@ module func (
 			end
 			
 			STATE_REQ_END: begin
-				if (!valid[44:0]) begin
+				if (!valid[35:0]) begin
 					done <= 1;
 					state_req <= STATE_REQ_DONE;
 					state_fetch <= STATE_FETCH_1;
@@ -152,7 +152,7 @@ module func (
 			default: begin end
 		endcase
 	
-		if (valid[45]) begin
+		if (valid[36]) begin
 			result <= add_q;
 		end
 	end

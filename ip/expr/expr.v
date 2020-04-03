@@ -1,7 +1,7 @@
 `timescale 1 ps / 1 ps
 
 /*
-	Latency of 3N + 10 cycles per instruction.
+	Latency of N + 9 cycles per instruction.
 	Fully pipelined at 1 instruction per cycle.
 */
 
@@ -33,7 +33,7 @@ module expr (
 		.q(add1_to_cos)
 	);
 
-	cordic cos (
+	cordic2 cos (
 		.clk(clk),
 		.reset(reset),
 		.theta(add1_to_cos),
@@ -43,7 +43,7 @@ module expr (
 	fp_mult mult1 (
 		.clk(clk),
 		.areset(reset),
-		.a(xs[32]),
+		.a(xs[23]),
 		.b(cos_to_mult1),
 		.q(mult1_to_add2)
 	);
@@ -59,7 +59,7 @@ module expr (
 	fp_mult mult2 (
 		.clk(clk),
 		.areset(reset),
-		.a(xs[36]),
+		.a(xs[27]),
 		.b(add2_to_mult2),
 		.q(mult2_q)
 	);
