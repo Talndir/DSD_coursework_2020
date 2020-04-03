@@ -1,0 +1,94 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/cordic2
+vclz
+!s110 1585910082
+!i10b 1
+!s100 c^:FUl??ezaS>4h:l;<JM3
+IANFhZMW8;b8`a_FegiS7b0
+Z0 VDg1SIo80bB@j0V0VzS_@n1
+Z1 dC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv
+w1585910080
+8C:\Users\Omar\Documents\DSD\system_template_de1_soc\ip\conv\clz.v
+FC:\Users\Omar\Documents\DSD\system_template_de1_soc\ip\conv\clz.v
+L0 3
+Z2 OV;L;10.5b;63
+r1
+!s85 0
+31
+!s108 1585910082.000000
+!s107 C:\Users\Omar\Documents\DSD\system_template_de1_soc\ip\conv\clz.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:\Users\Omar\Documents\DSD\system_template_de1_soc\ip\conv\clz.v|
+!i113 1
+Z3 o-work work
+Z4 tCvgOpt 0
+vconv_tb
+!s110 1585914638
+!i10b 1
+!s100 ]M3[f9@e=T1UzoDagD>[J2
+IN^=iJlo0d<iR4?jY6BB^M1
+R0
+R1
+w1585914635
+8C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/conv_tb.v
+FC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/conv_tb.v
+L0 3
+R2
+r1
+!s85 0
+31
+!s108 1585914638.000000
+!s107 C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/conv_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/conv_tb.v|
+!i113 1
+R3
+R4
+vfp_to_int
+!s110 1585911268
+!i10b 1
+!s100 1Kn0Z66;_[n^DaD]DR5`o2
+IK7AU<ehc<V;MB`>IQbz`j1
+R0
+R1
+w1585911262
+8C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/fp_to_int.v
+FC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/fp_to_int.v
+L0 3
+R2
+r1
+!s85 0
+31
+!s108 1585911268.000000
+!s107 C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/fp_to_int.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/fp_to_int.v|
+!i113 1
+R3
+R4
+vint_to_fp
+!s110 1585912899
+!i10b 1
+!s100 M]mIN<TAaGE<AJh9cEZUN0
+I0VNK=AoEZ@ICj0N<EDn>L2
+R0
+R1
+w1585912897
+8C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/int_to_fp.v
+FC:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/int_to_fp.v
+L0 3
+R2
+r1
+!s85 0
+31
+!s108 1585912899.000000
+!s107 C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/int_to_fp.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Omar/Documents/DSD/system_template_de1_soc/ip/conv/int_to_fp.v|
+!i113 1
+R3
+R4

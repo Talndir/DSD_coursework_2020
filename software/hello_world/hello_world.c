@@ -11,9 +11,7 @@
 
 #define FP_ADD(A,B) __builtin_custom_fnff(0x0,(A),(B))
 #define FP_MULT(A,B) __builtin_custom_fnff(0x1,(A),(B))
-
-// NORMAL, LOOKUP or TAYLOR
-#define NORMAL
+#define COS(A,B) __builtin_custom_fnfi(0x2,(A),(B))
 
 #define TEST 2
 
@@ -37,60 +35,6 @@
 
 #endif
 
-#ifdef LOOKUP
-
-#define TABLE_SIZE 8192
-#define PI 3.14159265359f
-#define HALF_PI 1.57079632679f
-#define TWO_PI 6.28318530718f
-
-float lookupTable[TABLE_SIZE];
-
-void initLookup()
-{
-	for (unsigned int i = 0; i < TABLE_SIZE; ++i)
-		lookupTable[i] = cos(HALF_PI * (float)i / (float)TABLE_SIZE);
-}
-
-float cosine(float x)
-{
-	x = fmod(fabs(x), TWO_PI);
-	if (x > PI)
-		x = PI - x;
-	if (x < HALF_PI)
-		return lookupTable[(int)(x * (float)TABLE_SIZE / HALF_PI)];
-	else
-		return -lookupTable[(int)((HALF_PI - x) * (float)TABLE_SIZE / HALF_PI)];
-}
-
-#endif
-
-#ifdef TAYLOR
-
-#define TWO_PI 6.28318530718f
-#define PI_BY_FOUR 0.78539816339f
-#define HALF_SQRT_TWO 0.70710678118f
-
-float cosine(float x)
-{
-	x = fmod(fabs(x), TWO_PI) - PI_BY_FOUR;
-	float x2 = x * x;
-	float x3 = x2 * x;
-	float x4 = x3 * x;
-	float x5 = x4 * x;
-
-	float sum = HALF_SQRT_TWO;
-	sum -= x * HALF_SQRT_TWO;
-	sum -= x2 * 0.5 * HALF_SQRT_TWO;
-	sum += x3 * (1.f / 6.f) * HALF_SQRT_TWO;
-	sum += x4 * (1.f / 24.f) * HALF_SQRT_TWO;
-	sum -= x5 * (1.f / 120.f) * HALF_SQRT_TWO;
-
-	return sum;
-}
-
-#endif
-
 // Generates the vector x and stores it in the memory
 void generateVector(float *x, int start, int length)
 {
@@ -108,13 +52,7 @@ float sumVector(float *x, int length)
 	float c;
 	for (unsigned int i = 0; i < length; ++i)
 	{
-#ifdef NORMAL
-		//c = cos((x[i] / 128.f) - 1.f);
-		c = cos(FP_ADD(-1.f, FP_MULT(x[i], 0.0078125f)));
-#else
-		c = cosine((x[i] / 128.f) - 1.f);
-#endif
-		//sum += x[i] * (0.5f + x[i] * c);
+		c = COS((x[i] / 128.f) - 1.f, 32);
 		sum += FP_MULT(x[i], FP_ADD(0.5f, FP_MULT(x[i], c)));
 	}
 
@@ -136,19 +74,54 @@ long unsigned runOnce()
 	return time;
 }
 
-int main()
+void monteCarlo()
 {
-	printf("Task 5!\n");
+	printf("Monte Carlo\n");
+	srand((unsigned)times(NULL));
+
+	double errors[10000];
+
+	for (unsigned int n = 1; n <= 32; ++n)
+	{
+		double sum = 0.f;
+		for (unsigned int i = 0; i < 10000; ++i)
+		{
+			float r = (float)rand() / (float)(RAND_MAX);
+			r = (r * 2.f) - 1.f;	// In [-1, 1];
+			if (r == 1.f)
+				continue;	// 1 is not allowed
+
+			double c = COS(r, n);
+			double e = fabs(c - cos(r));
+			errors[i] = e;
+			sum += e * e;
+		}
+
+		double mse = sum / 10000;
+		double stdev = 0.f;
+		for (unsigned int i = 0; i < 10000; ++i)
+			stdev += (errors[i] - mse) * (errors[i] - mse);
+		stdev = sqrt(stdev) / 100;
+		stdev = 1.96f * stdev / 100;
+		printf("n = %u, MSE = %.17g, CI = MSE +- %.17g\n", n, mse, stdev);
+	}
+}
+
+void runTest()
+{
 	printf("Test %u\n", TEST);
-#ifdef LOOKUP
-	initLookup();
-#endif
-	// Run 10 times
+
+	// Run 5 times
 	long unsigned sum = 0;
 	for (unsigned int i = 0; i < 5; ++i)
 		sum += runOnce();
 	sum /= 5;
 	printf("Average time: %lums\n", sum);
+}
 
+int main()
+{
+	printf("Task 7!\n");
+	monteCarlo();
 	return 0;
 }
