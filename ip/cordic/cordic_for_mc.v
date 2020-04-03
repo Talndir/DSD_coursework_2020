@@ -6,7 +6,7 @@
 	So this should only be used when testing e.g. Monte-Carlo simulation.
 */
 
-module cordic (
+module cordic_for_mc (
 	input	wire			clk,
 	input	wire			reset,
 	input	wire	[31:0]	theta,

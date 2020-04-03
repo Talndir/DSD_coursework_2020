@@ -9,7 +9,6 @@ module cordic (
 	input	wire			clk,
 	input	wire			reset,
 	input	wire	[31:0]	theta,
-	input	wire	[4:0]	n,
 	output	reg		[31:0]	result
 	);
 
@@ -81,13 +80,9 @@ module cordic (
 	generate
 	for (i = 0; i < N; i = i + 1) begin : cordic2_loop
 		always @ (posedge clk) begin
-			if (i < n) begin
-				x[i+1] <= z[i][31] ? x[i] + (y[i] >>> i) : x[i] - (y[i] >>> i);
-				y[i+1] <= z[i][31] ? y[i] - (x[i] >>> i) : y[i] + (x[i] >>> i);
-				z[i+1] <= z[i][31] ? z[i] + ARCTAN_TABLE[i] : z[i] - ARCTAN_TABLE[i];
-			end else begin
-				x[i+1] <= x[i];
-			end			
+			x[i+1] <= z[i][31] ? x[i] + (y[i] >>> i) : x[i] - (y[i] >>> i);
+			y[i+1] <= z[i][31] ? y[i] - (x[i] >>> i) : y[i] + (x[i] >>> i);
+			z[i+1] <= z[i][31] ? z[i] + ARCTAN_TABLE[i] : z[i] - ARCTAN_TABLE[i];		
 		end
 	end
 	endgenerate

@@ -106,6 +106,7 @@ set_location_assignment PIN_AB13 -to oDRAM_DQM[0]
 
 set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
 set_global_assignment -name SEARCH_PATH "c:\\users\\omar\\documents\\dsd\\system_template_de1_soc"
+set_global_assignment -name VERILOG_FILE ip/expr/expr.v -library expr
 set_global_assignment -name VERILOG_FILE ip/conv/int_to_fp.v -library conv
 set_global_assignment -name VERILOG_FILE ip/conv/fp_to_int.v -library conv
 set_global_assignment -name VERILOG_FILE ip/conv/clz.v -library conv

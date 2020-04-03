@@ -10,10 +10,11 @@
 #include <tgmath.h>
 
 #define FP_ADD(A,B) __builtin_custom_fnff(0x0,(A),(B))
-#define FP_MULT(A,B) __builtin_custom_fnff(0x1,(A),(B))
-#define COS(A,B) __builtin_custom_fnfi(0x2,(A),(B))
+//#define FP_MULT(A,B) __builtin_custom_fnff(0x1,(A),(B))
+//#define COS(A) __builtin_custom_fnf(0x2,(A))
+#define EXPR(A) __builtin_custom_fnf(0x3,(A))
 
-#define TEST 2
+#define TEST 3
 
 #if TEST == 1
 
@@ -49,13 +50,8 @@ void generateVector(float *x, int start, int length)
 float sumVector(float *x, int length)
 {
 	float sum = 0.f;
-	float c;
 	for (unsigned int i = 0; i < length; ++i)
-	{
-		c = COS((x[i] / 128.f) - 1.f, 32);
-		sum += FP_MULT(x[i], FP_ADD(0.5f, FP_MULT(x[i], c)));
-	}
-
+		sum = FP_ADD(EXPR(x[i]), sum);
 	return sum;
 }
 
@@ -73,6 +69,12 @@ long unsigned runOnce()
 	printf(" Result = %f\n", y);
 	return time;
 }
+
+#if 0
+/*
+	Requires a special version of COS that takes a second parameter
+	which is number of iterations. Design is in cordic_for_mc.v.
+*/
 
 void monteCarlo()
 {
@@ -104,8 +106,11 @@ void monteCarlo()
 		stdev = sqrt(stdev) / 100;
 		stdev = 1.96f * stdev / 100;
 		printf("n = %u, MSE = %.17g, CI = MSE +- %.17g\n", n, mse, stdev);
+		//printf("%.17g\t%.17g\n", mse, stdev);
 	}
 }
+
+#endif
 
 void runTest()
 {
@@ -122,6 +127,6 @@ void runTest()
 int main()
 {
 	printf("Task 7!\n");
-	monteCarlo();
+	runTest();
 	return 0;
 }
